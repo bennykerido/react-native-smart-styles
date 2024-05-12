@@ -49,5 +49,8 @@ const SmartStyles = {
     create: function (styleSheet) {
         return react_native_1.StyleSheet.create(formatStyles(styleSheet));
     },
+    helper: function (styleSheet) {
+        return styleSheet;
+    }
 };
 exports.default = SmartStyles;

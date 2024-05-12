@@ -7,9 +7,16 @@ const longer = Math.max(width, height);
 
 const baseWidth = 375;
 const baseHeight = 812;
-
-let FontFamilies: Record<string, string> = {}; // Can be initialized via `setFontFamilies`
-let ColorsPalette: Record<string, string> = {};
+type Settings = {
+    fontFamilies: Record<string, string>,
+    colorsPalette: Record<string, string>,
+    theme: 'dark' | 'light',
+}
+const settings: Settings = {
+    fontFamilies: {},
+    colorsPalette: {},
+    theme: getColorScheme() as 'dark' | 'light',
+}
 
 function getDeviceBaseScale() {
     return {
@@ -25,9 +32,8 @@ function normalize(size: number, horizontal = true, round = false) {
 }
 
 export function getFont(fontFamily: string) {
-    console.log(FontFamilies);
-    if(Object.keys(FontFamilies).includes(fontFamily)) {
-        return FontFamilies[fontFamily];
+    if(Object.keys(settings.fontFamilies).includes(fontFamily)) {
+        return settings.fontFamilies[fontFamily];
     } else {
         return fontFamily;
     }
@@ -46,22 +52,26 @@ export function getColor(value: string) {
         value = !isDarkTheme ? lightColor : darkColor as any;
     }
 
-    const palette = ColorsPalette;
+    const palette = settings.colorsPalette;
     return palette[value] ? palette[value] : value;
 }
 type Config = {
     fonts?: Record<string, string>;
     colors?: Record<string, string>;
+    theme?: 'dark' | 'light';
 }
 export function configureSmartStyles(config: Config) {
     if (config.colors) setColorsPalette(config.colors);
     if (config.fonts) setFontFamilies(config.fonts);
+    if (config.theme) setTheme(config.theme);
 }
 export const themeColor = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const tc = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
-export const setFontFamilies = (fontFamilies: Record<string, string>) => (FontFamilies = fontFamilies);
-export const setColorsPalette = (colorsPalette: Record<string, string>) => (ColorsPalette = colorsPalette);
+export const setFontFamilies = (fontFamilies: Record<string, string>) => (settings.fontFamilies = fontFamilies);
+export const setColorsPalette = (colorsPalette: Record<string, string>) => (settings.colorsPalette = colorsPalette);
+export const setTheme = (theme: 'dark' | 'light') => (settings.theme = theme);
+export const getTheme = () => settings.theme;
 export const widthPixel = (value: number, round = false) => normalize(value, true, round);
 export const heightPixel = (value: number, round = false) => normalize(value, false, round);
-export const wp = (value: number, round = false) => normalize(value, true, round);
-export const hp = (value: number, round = false) => normalize(value, false, round);
+export const wp = (value: number, round = false) => widthPixel(value, round);
+export const hp = (value: number, round = false) => heightPixel(value, round);

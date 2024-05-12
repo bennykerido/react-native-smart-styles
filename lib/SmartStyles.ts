@@ -49,6 +49,9 @@ const SmartStyles = {
     create: function<T>(styleSheet: NamedStyles<T>) {
         return StyleSheet.create(formatStyles(styleSheet))
     },
+    helper: function<T>(styleSheet: NamedStyles<T>) {
+        return styleSheet;
+    }
 };
 
 export default SmartStyles;
