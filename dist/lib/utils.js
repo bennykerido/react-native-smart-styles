@@ -1,6 +1,15 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.setColorsPalette = exports.setFontFamilies = exports.tc = exports.themeColor = exports.getColor = exports.getFont = void 0;
+exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.setColorsPalette = exports.setFontFamilies = exports.tc = exports.themeColor = exports.configureSmartStyles = exports.getColor = exports.getFont = void 0;
 const react_native_1 = require("react-native");
 var getColorScheme = react_native_1.Appearance.getColorScheme;
 const { width, height } = react_native_1.Dimensions.get("window");
@@ -47,6 +56,16 @@ function getColor(value) {
     return palette[value] ? palette[value] : value;
 }
 exports.getColor = getColor;
+function configureSmartStyles(config) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (config.colors)
+            (0, exports.setColorsPalette)(config.colors);
+        if (config.fonts)
+            (0, exports.setFontFamilies)(config.fonts);
+        return;
+    });
+}
+exports.configureSmartStyles = configureSmartStyles;
 const themeColor = (lightColor, darkColor) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 exports.themeColor = themeColor;
 const tc = (lightColor, darkColor) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;

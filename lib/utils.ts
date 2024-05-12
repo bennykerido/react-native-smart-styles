@@ -49,7 +49,15 @@ export function getColor(value: string) {
     const palette = ColorsPalette;
     return palette[value] ? palette[value] : value;
 }
-
+type Config = {
+    fonts?: Record<string, string>;
+    colors?: Record<string, string>;
+}
+export async function configureSmartStyles(config: Config) {
+    if (config.colors) setColorsPalette(config.colors);
+    if (config.fonts) setFontFamilies(config.fonts);
+    return;
+}
 export const themeColor = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const tc = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const setFontFamilies = (fontFamilies: Record<string, string>) => (FontFamilies = fontFamilies);
