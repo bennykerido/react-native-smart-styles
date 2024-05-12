@@ -15,6 +15,7 @@ function convertObject(object) {
     }
 }
 function convertValue(object, key) {
+    var _a;
     if (typeof property_mapping_1.normalizedProperties[key] === 'function') {
         if (typeof object[key] === 'number' ||
             (typeof object[key] === "string" && key === 'fontFamily')) {
@@ -23,9 +24,11 @@ function convertValue(object, key) {
         else if (typeof object[key] === 'string') {
             const regex = /([hHwW])(\d+)/;
             const match = object[key].match(regex);
-            const dimension = match[1].toLowerCase();
-            const value = Number(match[2]);
-            object[key] = dimension === 'h' ? (0, utils_1.hp)(value) : (0, utils_1.wp)(value);
+            const dimension = (_a = match[1]) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+            if (dimension) {
+                const value = Number(match[2]);
+                object[key] = dimension === 'h' ? (0, utils_1.hp)(value) : (0, utils_1.wp)(value);
+            }
         }
     }
     else if (key.toLowerCase().includes('color')) {
