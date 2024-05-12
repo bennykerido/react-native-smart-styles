@@ -24,15 +24,16 @@ function normalize(size: number, horizontal = true, round = false) {
     return round ? Math.round(PixelRatio.roundToNearestPixel(newSize)) : newSize;
 }
 
-export const getFont = (fontFamily: string) => {
+export function getFont(fontFamily: string) {
+    console.log(FontFamilies);
     if(Object.keys(FontFamilies).includes(fontFamily)) {
         return FontFamilies[fontFamily];
     } else {
         return fontFamily;
     }
-};
+}
 
-export const getColor = (value: string): string => {
+export function getColor(value: string) {
     const theme = getColorScheme();
     const isDarkTheme = theme === "dark";
     const re = /(?:d|l|D|L)\((.*?)\)(?:\s*,\s*(?:d|l|D|L)\((.*?)\))?/;
@@ -47,7 +48,7 @@ export const getColor = (value: string): string => {
 
     const palette = ColorsPalette;
     return palette[value] ? palette[value] : value;
-};
+}
 
 export const themeColor = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const tc = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;

@@ -17,18 +17,16 @@ function convertObject (object: Record<string, any>) {
 
 function convertValue (object: Record<string, any>, key: string) {
     if (typeof normalizedProperties[key] === 'function') {
-        if (typeof object[key] === 'number') {
+        if (typeof object[key] === 'number' ||
+            (typeof object[key] === "string" && key === 'fontFamily')
+        ) {
             object[key] = normalizedProperties[key](object[key]);
         } else if (typeof object[key] === 'string') {
-            if (object[key].charAt(0) === 'w') {
-                const value = parseInt(object[key].replace('w', ''), 10);
-                object[key] = wp(value);
-            } else if (object[key].charAt(0) === 'h') {
-                const value = parseInt(object[key].replace('h', ''), 10);
-                object[key] = hp(value);
-            } else if (key === 'fontFamily') {
-                object[key] = normalizedProperties[key](object[key]);
-            }
+            const regex = /([hHwW])(\d+)/;
+            const match = object[key].match(regex);
+            const dimension = (match[1] as string).toLowerCase();
+            const value = Number(match[2]);
+            object[key] = dimension === 'h' ? hp(value) : wp(value);
         }
     } else if (key.toLowerCase().includes('color')) {
         object[key] = getColor(object[key]);
