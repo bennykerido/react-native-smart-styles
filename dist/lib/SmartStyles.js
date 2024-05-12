@@ -16,21 +16,16 @@ function convertObject(object) {
 }
 function convertValue(object, key) {
     if (typeof property_mapping_1.normalizedProperties[key] === 'function') {
-        if (typeof object[key] === 'number') {
+        if (typeof object[key] === 'number' ||
+            (typeof object[key] === "string" && key === 'fontFamily')) {
             object[key] = property_mapping_1.normalizedProperties[key](object[key]);
         }
         else if (typeof object[key] === 'string') {
-            if (object[key].charAt(0) === 'w') {
-                const value = parseInt(object[key].replace('w', ''), 10);
-                object[key] = (0, utils_1.wp)(value);
-            }
-            else if (object[key].charAt(0) === 'h') {
-                const value = parseInt(object[key].replace('h', ''), 10);
-                object[key] = (0, utils_1.hp)(value);
-            }
-            else if (key === 'fontFamily') {
-                object[key] = property_mapping_1.normalizedProperties[key](object[key]);
-            }
+            const regex = /([hHwW])(\d+)/;
+            const match = object[key].match(regex);
+            const dimension = match[1].toLowerCase();
+            const value = Number(match[2]);
+            object[key] = dimension === 'h' ? (0, utils_1.hp)(value) : (0, utils_1.wp)(value);
         }
     }
     else if (key.toLowerCase().includes('color')) {

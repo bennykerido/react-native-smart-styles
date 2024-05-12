@@ -21,16 +21,17 @@ function normalize(size, horizontal = true, round = false) {
     const newSize = horizontal ? size * width : size * height;
     return round ? Math.round(react_native_1.PixelRatio.roundToNearestPixel(newSize)) : newSize;
 }
-const getFont = (fontFamily) => {
+function getFont(fontFamily) {
+    console.log(FontFamilies);
     if (Object.keys(FontFamilies).includes(fontFamily)) {
         return FontFamilies[fontFamily];
     }
     else {
         return fontFamily;
     }
-};
+}
 exports.getFont = getFont;
-const getColor = (value) => {
+function getColor(value) {
     const theme = getColorScheme();
     const isDarkTheme = theme === "dark";
     const re = /(?:d|l|D|L)\((.*?)\)(?:\s*,\s*(?:d|l|D|L)\((.*?)\))?/;
@@ -44,7 +45,7 @@ const getColor = (value) => {
     }
     const palette = ColorsPalette;
     return palette[value] ? palette[value] : value;
-};
+}
 exports.getColor = getColor;
 const themeColor = (lightColor, darkColor) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 exports.themeColor = themeColor;
