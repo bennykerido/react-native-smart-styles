@@ -2,8 +2,10 @@
   "name": "react-native-smart-styles",
   "version": "0.0.1",
   "description": "Smart stylesheets for React Native applications to design once and easy",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "tsc"
   },
   "keywords": [],
