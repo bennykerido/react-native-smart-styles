@@ -24,10 +24,12 @@ function convertValue (object: Record<string, any>, key: string) {
         } else if (typeof object[key] === 'string') {
             const regex = /([hHwW])(\d+)/;
             const match = object[key].match(regex);
-            const dimension = match[1]?.toLowerCase();
-            if (dimension) {
-                const value = Number(match[2]);
-                object[key] = dimension === 'h' ? hp(value) : wp(value);
+            if (match) {
+                const dimension = match[1]?.toLowerCase();
+                if (dimension) {
+                    const value = Number(match[2]);
+                    object[key] = dimension === 'h' ? hp(value) : wp(value);
+                }
             }
         }
     } else if (key.toLowerCase().includes('color')) {

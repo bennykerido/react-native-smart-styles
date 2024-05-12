@@ -24,10 +24,12 @@ function convertValue(object, key) {
         else if (typeof object[key] === 'string') {
             const regex = /([hHwW])(\d+)/;
             const match = object[key].match(regex);
-            const dimension = (_a = match[1]) === null || _a === void 0 ? void 0 : _a.toLowerCase();
-            if (dimension) {
-                const value = Number(match[2]);
-                object[key] = dimension === 'h' ? (0, utils_1.hp)(value) : (0, utils_1.wp)(value);
+            if (match) {
+                const dimension = (_a = match[1]) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+                if (dimension) {
+                    const value = Number(match[2]);
+                    object[key] = dimension === 'h' ? (0, utils_1.hp)(value) : (0, utils_1.wp)(value);
+                }
             }
         }
     }
