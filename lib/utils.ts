@@ -56,7 +56,16 @@ type Config = {
 export async function configureSmartStyles(config: Config) {
     if (config.colors) setColorsPalette(config.colors);
     if (config.fonts) setFontFamilies(config.fonts);
-    return;
+    return new Promise((resolve, reject) => {
+        const to = setTimeout(() => {
+            if (
+                ((config.colors && config.colors === ColorsPalette) || !config.colors) &&
+                ((config.fonts && config.fonts === FontFamilies) || !config.fonts)) {
+                resolve(true);
+            }
+            clearTimeout(to);
+        }, 50);
+    });
 }
 export const themeColor = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const tc = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;

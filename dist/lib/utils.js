@@ -62,7 +62,15 @@ function configureSmartStyles(config) {
             (0, exports.setColorsPalette)(config.colors);
         if (config.fonts)
             (0, exports.setFontFamilies)(config.fonts);
-        return;
+        return new Promise((resolve, reject) => {
+            const to = setTimeout(() => {
+                if (((config.colors && config.colors === ColorsPalette) || !config.colors) &&
+                    ((config.fonts && config.fonts === FontFamilies) || !config.fonts)) {
+                    resolve(true);
+                }
+                clearTimeout(to);
+            }, 50);
+        });
     });
 }
 exports.configureSmartStyles = configureSmartStyles;
