@@ -11,10 +11,13 @@
    - [useTheme](#usethemestylesheet)
    - [widthPixel / wp](#widthpixelvalue-round--wpvalue-round)
    - [heightPixel / hp](#heightpixelvalue-round--hpvalue-round)
+   - [Overriding Default Conversion Methods](#overriding-default-conversion-methods)
 5. [Contributing](#contributing)
 
 ## Introduction
 React Native Smart Styles is designed to streamline the creation of style sheets in React Native projects by automatically adjusting styles to accommodate different screen sizes. This package handles all the heavy lifting, allowing developers to write styles quickly and easily without the need to manually account for device variability.
+
+---
 
 ## Installation
 To install the package, run the following command in your terminal:
@@ -23,7 +26,6 @@ npm install https://github.com/bennykerido/react-native-smart-styles.git
 # or
 yarn add https://github.com/bennykerido/react-native-smart-styles.git
 ```
-
 
 ---
 
@@ -45,6 +47,8 @@ You can customize font names and colors by creating a `smart-styles.config.json`
 }
 ```
 
+---
+
 ### Updating Configuration with CLI
 If you need to update your configuration after installation or if the `smart-styles.config.json` file does not exist, you can use the provided CLI tool. Simply run the following command:
 
@@ -55,6 +59,7 @@ smart-styles update
 This command updates the configuration based on the settings specified in `smart-styles.config.json`.
 > **Note**: After updating the config file you might have to re-run the app
 
+---
 
 ## Usage
 
@@ -63,6 +68,8 @@ First, import the `SmartStyles` from the package:
 ```javascript
 import {SmartStyles} from 'react-native-smart-styles';
 ```
+
+---
 
 ### Creating Styles
 Use `SmartStyles.create()` to pass your styling object. This method formats the styles according to different screen sizes:
@@ -80,6 +87,8 @@ const styles = SmartStyles.create({
   }
 });
 ```
+
+---
 
 ### Helper Function
 `SmartStyles.helper()` assists in writing stylesheets by providing autocomplete features but does not format the styles:
@@ -173,6 +182,8 @@ import { wp } from 'react-native-smart-styles';
 const screenWidthPortion = wp(50, true); // Returns the width equivalent to 50 units on the current screen, rounded to the nearest whole number.
 ```
 
+---
+
 ### `heightPixel(value, round)` / `hp(value, round)`
 Similar to `widthPixel`, these functions calculate and return a size value proportional to the current screen height. Use `heightPixel` or `hp` to adjust dimensions based on the screen's height for precise layout and animation work.
 
@@ -189,6 +200,35 @@ const screenHeightPortion = hp(20, true); // Returns the height equivalent to 20
 ```
 
 These functions should not be used directly within stylesheet definitions to avoid double conversion of values. They are best utilized in contexts where precise, scaled measurements are necessary outside of static styling, such as in dynamic visual components or animations.
+
+---
+
+## Overriding Default Conversion Methods
+
+`React Native Smart Styles` allows you to override the default conversion method for dimension properties such as `width` and `height`. By default, numerical values are scaled relative to the axis they're sitting on. However, you can specify a different scaling basis using prefixes:
+
+- **`h` Prefix**: Use this prefix to indicate that the value should be calculated relative to the screen height. For instance, `h50` will calculate the value as 50 units relative to the height of the screen.
+  
+- **`w` Prefix**: This prefix can be used when you want the value to explicitly be calculated based on the screen width, which is useful when working with dimensions that must maintain consistent scaling with width.
+
+### Example of Overriding Conversion
+
+When designing a UI element like a circle that needs to maintain its aspect ratio regardless of screen dimensions, you might specify:
+
+```javascript
+const styles = SmartStyles.create({
+  circle: {
+    width: 'h100',  // Ensures the width of the circle is always 100 units relative to the screen height
+    height: 100     // Automatically calculated relativly to the screen height
+  },
+  widthCircle: {
+    width: 100,     // Automatically calculated relativly to the screen width
+    height: 'w100'  // Ensures the height of the circle is always 100 units relative to the screen width
+  }
+});
+```
+
+This feature is particularly useful for maintaining design integrity across devices with varying aspect ratios and dimensions.
 
 ---
 
