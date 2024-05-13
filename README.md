@@ -14,7 +14,7 @@ npm install react-native-smart-styles
 ### Importing
 First, import the `SmartStyles` from the package:
 ```
-import SmartStyles from 'react-native-smart-styles';
+import {SmartStyles} from 'react-native-smart-styles';
 ```
 
 ### Creating Styles
