@@ -1,7 +1,6 @@
 "use strict";
 var _a, _b;
-Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("./utils");
+const { setColorsPalette, setFontFamilies } = require('./utils');
 const fs = require('fs');
 const path = require('path');
 function find(...args) {
@@ -48,5 +47,5 @@ function json(...args) {
 }
 const configPath = find('smart-styles.config.json');
 const configObject = json(configPath);
-(0, utils_1.setFontFamilies)((_a = configObject.fonts) !== null && _a !== void 0 ? _a : {});
-(0, utils_1.setColorsPalette)((_b = configObject.colors) !== null && _b !== void 0 ? _b : {});
+setFontFamilies((_a = configObject.fonts) !== null && _a !== void 0 ? _a : {});
+setColorsPalette((_b = configObject.colors) !== null && _b !== void 0 ? _b : {});

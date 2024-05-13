@@ -1,5 +1,4 @@
-import {setColorsPalette, setFontFamilies} from "./utils";
-
+const {setColorsPalette, setFontFamilies} = require('./utils');
 const fs = require('fs');
 const path = require('path')
 
