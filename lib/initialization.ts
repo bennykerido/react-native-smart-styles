@@ -25,7 +25,7 @@ function readConfigFile(rootDir: string, configFile = configFileName) {
 
 function writeToConfigFile(content: string) {
     const outputPath = path.join(process.cwd(), 'config.js');
-    fs.writeFileSync(outputPath, `export default ${content}`);
+    fs.writeFileSync(outputPath, `export default ${content};`);
 }
 
 const rootDir = findRootDir(process.cwd());
