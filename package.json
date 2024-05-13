@@ -12,6 +12,10 @@
   "bin": {
     "smart-styles": "cli.js"
   },
+  "files": [
+    "*",
+    "!media"
+  ],
   "keywords": [],
   "author": "Benny Kerido",
   "license": "MIT",
