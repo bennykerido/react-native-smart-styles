@@ -19,5 +19,8 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
   }
 }
