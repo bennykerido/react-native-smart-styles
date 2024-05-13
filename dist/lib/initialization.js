@@ -54,17 +54,20 @@ function findRootDir(startDir) {
     }
     throw new Error(`Could not find the root directory with ${file}`);
 }
-function readConfigFile(configFile = configFileName) {
-    const rootDir = process.cwd();
+function readConfigFile(rootDir, configFile = configFileName) {
     const configPath = path.join(rootDir, configFile);
-    console.log(configPath);
     if (fs.existsSync(configPath)) {
         const configData = fs.readFileSync(configPath, 'utf-8');
-        const outputPath = path.join(rootDir, 'config.js');
-        fs.writeFileSync(outputPath, `export default ${configData}`);
+        return configData;
     }
     else {
         throw new Error('Config file not found');
     }
 }
-readConfigFile();
+function writeToConfigFile(content) {
+    const outputPath = path.join(process.cwd(), 'config.js');
+    fs.writeFileSync(outputPath, `export default ${content}`);
+}
+const rootDir = findRootDir(process.cwd());
+const config = readConfigFile(rootDir);
+writeToConfigFile(config);
