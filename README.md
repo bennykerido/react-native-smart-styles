@@ -7,10 +7,10 @@
 4. [Usage](#usage)
    - [Creating Styles](#creating-styles)
    - [Helper Function](#helper-function)
-   - [themeColor / tc](#`themecolor(lightcolor,-darkcolor)`-/-`tc(lightcolor,-darkcolor)`)
-   - [useTheme](#`usetheme(stylesheet)`)
-   - [widthPixel / wp](#45-widthpixel--wp)
-   - [heightPixel / hp](#46-heightpixel--hp)
+   - [themeColor / tc](#themecolorlightcolor-darkcolor--tclightcolor-darkcolor)
+   - [useTheme](#usethemestylesheet)
+   - [widthPixel / wp](#widthpixelvalue-round--wpvalue-round)
+   - [heightPixel / hp](#heightpixelvalue-round--hpvalue-round)
 5. [Contributing](#contributing)
 
 ## Introduction
