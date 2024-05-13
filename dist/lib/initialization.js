@@ -61,7 +61,7 @@ function readConfigFile(rootDir, configFile = configFileName) {
         return configData;
     }
     else {
-        throw new Error('Config file not found');
+        throw new Error(`Config file not found at the root directory, please create a new file called ${configFileName}`);
     }
 }
 function writeToConfigFile(content) {

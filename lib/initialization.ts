@@ -65,7 +65,7 @@ function readConfigFile(rootDir: string, configFile = configFileName) {
         const configData = fs.readFileSync(configPath, 'utf-8');
         return configData;
     } else {
-        throw new Error('Config file not found');
+        throw new Error(`Config file not found at the root directory, please create a new file called ${configFileName}`);
     }
 }
 
