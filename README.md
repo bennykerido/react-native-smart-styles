@@ -158,7 +158,7 @@ const themedStyles = SmartStyles.helper({
   },
   text: {
     fontSize: 18,
-    color: tc('#fff', '#000),
+    color: tc('#fff', '#000'),
   }
 });
 ```
