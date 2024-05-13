@@ -55,16 +55,6 @@ export function getColor(value: string) {
     const palette = settings.colorsPalette;
     return palette[value] ? palette[value] : value;
 }
-type Config = {
-    fonts?: Record<string, string>;
-    colors?: Record<string, string>;
-    theme?: 'dark' | 'light';
-}
-export function configureSmartStyles(config: Config) {
-    if (config.colors) setColorsPalette(config.colors);
-    if (config.fonts) setFontFamilies(config.fonts);
-    if (config.theme) setTheme(config.theme);
-}
 export const themeColor = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const tc = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const setFontFamilies = (fontFamilies: Record<string, string>) => (settings.fontFamilies = fontFamilies);

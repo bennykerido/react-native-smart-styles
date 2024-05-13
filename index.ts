@@ -1,3 +1,5 @@
-import {configureSmartStyles, setFontFamilies, setColorsPalette, themeColor, tc} from "./lib/utils";
+import './lib/initialization';
+import {setFontFamilies, setColorsPalette, themeColor, tc} from "./lib/utils";
 import SmartStyles from "./lib/SmartStyles";
-export {SmartStyles, setFontFamilies, setColorsPalette, themeColor, tc, configureSmartStyles};
+import useTheme from "./lib/useTheme";
+export {SmartStyles, useTheme, setFontFamilies, setColorsPalette, themeColor, tc};
