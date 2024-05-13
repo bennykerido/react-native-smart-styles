@@ -1,7 +1,7 @@
 const {setColorsPalette, setFontFamilies} = require('./utils');
 const fs = require('fs');
 const path = require('path')
-
+const configFileName = 'smart-styles.config.json';
 function find(...args: string[]) {
     const rel = path.join.apply(null, [].slice.call(args));
     return findStartingWith(path.dirname(process.mainModule?.filename), rel);
@@ -48,7 +48,38 @@ function json(...args: string[]) {
     return content ? parse(content) : {};
 }
 
-const configPath = find('smart-styles.config.json');
-const configObject = json(configPath);
-setFontFamilies(configObject.fonts ?? {});
-setColorsPalette(configObject.colors ?? {});
+function findRootDit(startDir: string) {
+    let currentDir = startDir;
+    while (currentDir !== path.parse(currentDir).root) {
+        if (fs.existsSync(path.join(currentDir, configFileName))) {
+            return currentDir;
+        }
+        currentDir = path.dirname(currentDir); // Move one directory up
+    }
+
+    throw new Error(`Could not find the root directory with ${file}`);
+}
+
+function readConfigFile(rootDir: string, configFile = configFileName) {
+    const configPath = path.join(rootDir, configFile);
+    if (fs.existsSync(configPath)) {
+        const configData = fs.readFileSync(configPath, 'utf-8');
+        return JSON.parse(configData);
+    } else {
+        throw new Error('Config file not found');
+    }
+}
+
+const rootDir = findRootDit(__dirname);
+try {
+    const config = readConfigFile(rootDir)
+    setFontFamilies(config.fonts ?? {});
+    setColorsPalette(config.colors ?? {});
+} catch (error: any) {
+    console.error(error.message);
+}
+
+// const configPath = find('smart-styles.config.json');
+// const configObject = json(configPath);
+// setFontFamilies(configObject.fonts ?? {});
+// setColorsPalette(configObject.colors ?? {});
