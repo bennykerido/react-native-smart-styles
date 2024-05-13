@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tc = exports.themeColor = exports.setColorsPalette = exports.setFontFamilies = exports.useTheme = exports.SmartStyles = void 0;
-require("./lib/initialization");
 const utils_1 = require("./lib/utils");
 Object.defineProperty(exports, "setFontFamilies", { enumerable: true, get: function () { return utils_1.setFontFamilies; } });
 Object.defineProperty(exports, "setColorsPalette", { enumerable: true, get: function () { return utils_1.setColorsPalette; } });
