@@ -13,7 +13,7 @@ switch (command) {
         try {
             process.chdir(cliPath.dirname(__filename));
             console.log('Updating config file...');
-            require('./lib/initialization');
+            require('./dist/lib/initialization');
             console.log('Config file successfully updated');
         } catch (e) {
             console.error(`Failed to change directory: ${e}`);
