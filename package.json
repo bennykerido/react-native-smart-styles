@@ -9,20 +9,21 @@
     "postinstall": "node ./dist/lib/initialization.js",
     "build": "tsc"
   },
+  "bin": {
+    "smart-styles": "dist/cli.js"
+  },
   "keywords": [],
   "author": "Benny Kerido",
   "license": "MIT",
   "private": true,
   "devDependencies": {
     "@types/node": "^20.12.11",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
-  },
-  "dependencies": {
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7"
   }
 }
