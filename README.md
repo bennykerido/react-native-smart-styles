@@ -13,13 +13,13 @@ npm install react-native-smart-styles
 
 ### Importing
 First, import the `SmartStyles` from the package:
-```
+```javascript
 import {SmartStyles} from 'react-native-smart-styles';
 ```
 
 ### Creating Styles
 Use `SmartStyles.create()` to pass your styling object. This method formats the styles according to different screen sizes:
-```
+```javascript
 const styles = SmartStyles.create({
   container: {
     flex: 1,
@@ -36,7 +36,7 @@ const styles = SmartStyles.create({
 
 ### Helper Function
 `SmartStyles.helper()` assists in writing stylesheets by providing autocomplete features but does not format the styles:
-```
+```javascript
 const unformattedStyles = SmartStyles.helper({
   button: {
     padding: 10,
