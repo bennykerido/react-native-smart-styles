@@ -1,5 +1,5 @@
 import {Appearance, Dimensions, PixelRatio} from "react-native";
-import config from '../config.js';
+import config from '../../config.js';
 import getColorScheme = Appearance.getColorScheme;
 
 const { width, height } = Dimensions.get("window");

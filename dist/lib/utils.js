@@ -6,7 +6,7 @@ var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.getTheme = exports.setTheme = exports.setColorsPalette = exports.setFontFamilies = exports.tc = exports.themeColor = exports.getColor = exports.getFont = void 0;
 const react_native_1 = require("react-native");
-const config_js_1 = __importDefault(require("../config.js"));
+const config_js_1 = __importDefault(require("../../config.js"));
 var getColorScheme = react_native_1.Appearance.getColorScheme;
 const { width, height } = react_native_1.Dimensions.get("window");
 const shorter = Math.min(width, height);
