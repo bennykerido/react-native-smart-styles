@@ -14,8 +14,8 @@ type Settings = {
     theme: 'dark' | 'light',
 }
 const settings: Settings = {
-    fontFamilies: {},
-    colorsPalette: {},
+    fontFamilies: config?.fonts ?? {},
+    colorsPalette: config?.colors ?? {},
     theme: getColorScheme() as 'dark' | 'light',
 }
 

@@ -1,7 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.getTheme = exports.setTheme = exports.setColorsPalette = exports.setFontFamilies = exports.tc = exports.themeColor = exports.getColor = exports.getFont = void 0;
 const react_native_1 = require("react-native");
+const config_js_1 = __importDefault(require("../config.js"));
 var getColorScheme = react_native_1.Appearance.getColorScheme;
 const { width, height } = react_native_1.Dimensions.get("window");
 const shorter = Math.min(width, height);
@@ -9,8 +14,8 @@ const longer = Math.max(width, height);
 const baseWidth = 375;
 const baseHeight = 812;
 const settings = {
-    fontFamilies: {},
-    colorsPalette: {},
+    fontFamilies: (_a = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.fonts) !== null && _a !== void 0 ? _a : {},
+    colorsPalette: (_b = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.colors) !== null && _b !== void 0 ? _b : {},
     theme: getColorScheme(),
 };
 function getDeviceBaseScale() {
