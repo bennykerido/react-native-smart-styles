@@ -30,3 +30,6 @@ if (rootDir) {
     const config = readConfigFile(rootDir);
     writeToConfigFile(config);
 }
+else {
+    writeToConfigFile('{}');
+}
