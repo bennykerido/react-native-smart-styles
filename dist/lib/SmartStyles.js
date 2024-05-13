@@ -4,6 +4,7 @@ exports.formatStyles = void 0;
 const react_native_1 = require("react-native");
 const utils_1 = require("./utils");
 const property_mapping_1 = require("./property-mapping");
+/* ============= Types ============= */
 function convertObject(object) {
     for (const key in object) {
         if (Array.isArray(object[key])) {
