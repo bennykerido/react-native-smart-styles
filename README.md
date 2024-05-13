@@ -11,6 +11,37 @@ npm install https://github.com/bennykerido/react-native-smart-styles.git
 yarn add https://github.com/bennykerido/react-native-smart-styles.git
 ```
 
+
+---
+
+## Configuration
+
+### Using `smart-styles.config.json`
+You can customize font names and colors by creating a `smart-styles.config.json` file in the root of your project. This JSON file allows you to specify your preferences which will be automatically applied during the package installation. Here’s an example of what the file might look like:
+
+```json
+{
+  "fonts": {
+    "primary": "Arial",
+    "secondary": "Roboto"
+  },
+  "colors": {
+    "primary": "#333",
+    "accent": "#007bff"
+  }
+}
+```
+
+### Updating Configuration with CLI
+If you need to update your configuration after installation or if the `smart-styles.config.json` file does not exist, you can use the provided CLI tool. Simply run the following command:
+
+```bash
+smart-styles update
+```
+
+This command updates the configuration based on the settings specified in `smart-styles.config.json`.
+
+
 ## Usage
 
 ### Importing
