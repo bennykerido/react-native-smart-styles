@@ -1,4 +1,4 @@
-# React Native Smart Styles
+![Logo](media/RNSS.png)
 
 ## Introduction
 React Native Smart Styles is designed to streamline the creation of style sheets in React Native projects by automatically adjusting styles to accommodate different screen sizes. This package handles all the heavy lifting, allowing developers to write styles quickly and easily without the need to manually account for device variability.
