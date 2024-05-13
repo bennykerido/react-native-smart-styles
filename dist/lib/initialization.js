@@ -23,7 +23,7 @@ function readConfigFile(rootDir, configFile = configFileName) {
 }
 function writeToConfigFile(content) {
     const outputPath = path.join(process.cwd(), 'config.js');
-    fs.writeFileSync(outputPath, `export default ${content}`);
+    fs.writeFileSync(outputPath, `export default ${content};`);
 }
 const rootDir = findRootDir(process.cwd());
 if (rootDir) {
