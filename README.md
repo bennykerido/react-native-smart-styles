@@ -40,6 +40,7 @@ smart-styles update
 ```
 
 This command updates the configuration based on the settings specified in `smart-styles.config.json`.
+> **Note**: After updating the config file you might have to re-run the app
 
 
 ## Usage
