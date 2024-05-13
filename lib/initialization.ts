@@ -47,7 +47,7 @@ function json(...args: string[]) {
     return content ? parse(content) : {};
 }
 
-function findRootDit(startDir: string) {
+function findRootDir(startDir: string) {
     let currentDir = startDir;
     while (currentDir !== path.parse(currentDir).root) {
         if (fs.existsSync(path.join(currentDir, configFileName))) {
@@ -62,6 +62,7 @@ function findRootDit(startDir: string) {
 function readConfigFile(configFile = configFileName) {
     const rootDir = process.cwd();
     const configPath = path.join(rootDir, configFile);
+    console.log(configPath);
     if (fs.existsSync(configPath)) {
         const configData = fs.readFileSync(configPath, 'utf-8');
         const outputPath = path.join(rootDir, 'config.js');
