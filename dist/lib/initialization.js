@@ -57,11 +57,10 @@ function findRootDir(startDir) {
 function readConfigFile(rootDir, configFile = configFileName) {
     const configPath = path.join(rootDir, configFile);
     if (fs.existsSync(configPath)) {
-        const configData = fs.readFileSync(configPath, 'utf-8');
-        return configData;
+        return fs.readFileSync(configPath, 'utf-8');
     }
     else {
-        throw new Error(`Config file not found at the root directory, please create a new file called ${configFileName}`);
+        return {};
     }
 }
 function writeToConfigFile(content) {
