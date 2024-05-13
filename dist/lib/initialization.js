@@ -1,5 +1,4 @@
 "use strict";
-const { setColorsPalette, setFontFamilies } = require('./utils');
 const fs = require('fs');
 const path = require('path');
 const configFileName = 'smart-styles.config.json';
