@@ -15,7 +15,7 @@ switch (command) {
             console.log('Updating config file...');
             require('./lib/initialization');
             console.log('Config file successfully updated');
-        } catch (e: any) {
+        } catch (e) {
             console.error(`Failed to change directory: ${e}`);
             process.exit(1);
         }

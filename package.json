@@ -10,7 +10,7 @@
     "build": "tsc"
   },
   "bin": {
-    "smart-styles": "dist/cli.js"
+    "smart-styles": "cli.js"
   },
   "keywords": [],
   "author": "Benny Kerido",
