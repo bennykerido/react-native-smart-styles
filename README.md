@@ -1,4 +1,4 @@
-![Logo](media/RNSS.png)
+![Logo](https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS.png?raw=true)
 
 ## Table of Contents
 1. [Introduction](#introduction)
