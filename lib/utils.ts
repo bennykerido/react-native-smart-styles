@@ -58,8 +58,6 @@ export function getColor(value: string) {
 }
 export const themeColor = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const tc = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
-export const setFontFamilies = (fontFamilies: Record<string, string>) => (settings.fontFamilies = fontFamilies);
-export const setColorsPalette = (colorsPalette: Record<string, string>) => (settings.colorsPalette = colorsPalette);
 export const setTheme = (theme: 'dark' | 'light') => (settings.theme = theme);
 export const getTheme = () => settings.theme;
 export const widthPixel = (value: number, round = false) => normalize(value, true, round);
