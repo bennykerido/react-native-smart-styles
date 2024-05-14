@@ -1,5 +1,5 @@
 {
-  "name": "@bo0gieman/react-native-smart-styles",
+  "name": "react-native-smart-styles",
   "version": "0.0.1",
   "description": "Smart stylesheets for React Native applications to design once and easy",
   "main": "dist/index.js",
@@ -16,10 +16,16 @@
     "*",
     "!media"
   ],
-  "keywords": [],
+  "keywords": [
+    "react",
+    "native",
+    "react-native",
+    "react native",
+    "stylesheet",
+    "screen sizes"
+  ],
   "author": "Benny Kerido",
   "license": "MIT",
-  "private": true,
   "devDependencies": {
     "@types/node": "^20.12.11",
     "typescript": "^5.4.5",

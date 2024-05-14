@@ -22,9 +22,9 @@ React Native Smart Styles is designed to streamline the creation of style sheets
 ## Installation
 To install the package, run the following command in your terminal:
 ```bash
-npm install https://github.com/bennykerido/react-native-smart-styles.git
+npm install react-native-smart-styles
 # or
-yarn add https://github.com/bennykerido/react-native-smart-styles.git
+yarn add react-native-smart-styles
 ```
 
 ---
