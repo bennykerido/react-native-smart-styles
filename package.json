@@ -24,6 +24,10 @@
     "stylesheet",
     "screen sizes"
   ],
+  "homepage": "https://www.github.com/bennykerido/react-native-smart-styles",
+  "bugs": {
+    "url": "https://www.github.com/bennykerido/react-native-smart-styles/issues"
+  },
   "author": "Benny Kerido",
   "license": "MIT",
   "devDependencies": {
