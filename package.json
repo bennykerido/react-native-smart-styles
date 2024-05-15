@@ -25,6 +25,10 @@
     "screen sizes"
   ],
   "homepage": "https://www.github.com/bennykerido/react-native-smart-styles",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bennykerido/react-native-smart-styles.git"
+  },
   "bugs": {
     "url": "https://www.github.com/bennykerido/react-native-smart-styles/issues"
   },
