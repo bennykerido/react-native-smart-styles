@@ -1,4 +1,7 @@
-[!["Buy Me A Coffee"](https://buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://www.buymeacoffee.com/bennykerido)[![NPM Version](https://img.shields.io/npm/v/react-native-smart-styles.svg?style=flat)]()[![NPM Downloads](https://img.shields.io/npm/d18m/react-native-smart-styles.svg?style=flat)]()[![NPM License](https://img.shields.io/npm/l/react-native-smart-styles.svg?style=flat)](https://github.com/bennykerido/react-native-smart-styles/blob/main/LICENSE.md)
+[!["Buy Me A Coffee"](https://img.shields.io/badge/%F0%9F%8D%BABuy%20Me%20A%20Beer-black.svg)](https://www.buymeacoffee.com/bennykerido)&nbsp;
+[![NPM Version](https://img.shields.io/npm/v/react-native-smart-styles.svg?style=flat)]()&nbsp;
+[![NPM Downloads](https://img.shields.io/npm/d18m/react-native-smart-styles.svg?style=flat)]()&nbsp;
+[![NPM License](https://img.shields.io/npm/l/react-native-smart-styles.svg?style=flat)](https://github.com/bennykerido/react-native-smart-styles/blob/main/LICENSE.md)
 ![Logo](https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS.png?raw=true)
 [![NPM](https://nodei.co/npm/react-native-smart-styles.png?downloads=true)](https://www.npmjs.com/package/react-native-smart-styles)
 
