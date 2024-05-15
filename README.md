@@ -102,8 +102,6 @@ const unformattedStyles = SmartStyles.helper({
 });
 ```
 
-To reflect the specific usage requirements of the `themeColor` and `tc` functions, here's an updated description for your README that includes these important details:
-
 ---
 
 ### `themeColor(lightColor, darkColor)` / `tc(lightColor, darkColor)`
@@ -130,7 +128,7 @@ const styles = SmartStyles.create({
 // The styles object now contains theme-aware properties that adapt based on the active color scheme.
 ```
 
-By integrating these functions directly into your style creation process and forwarding them into `useTheme` (if using `SmartStyles.helper()`), you ensure that your application's visual elements adapt seamlessly to the current theme, providing a consistent and user-friendly experience.
+By integrating these functions directly into your style creation process and forwarding them into `useTheme` (forward only when using `SmartStyles.helper()`), you ensure that your application's visual elements adapt seamlessly to the current theme, providing a consistent and user-friendly experience.
 
 ---
 
@@ -200,7 +198,7 @@ import { hp } from 'react-native-smart-styles';
 const screenHeightPortion = hp(20, true); // Returns the height equivalent to 20 units on the current screen, rounded to the nearest whole number.
 ```
 
-These functions should not be used directly within stylesheet definitions to avoid double conversion of values. They are best utilized in contexts where precise, scaled measurements are necessary outside of static styling, such as in dynamic visual components or animations.
+These functions should not be used directly within `SmartStyles.create()` definitions to avoid double conversion of values. They are best utilized in contexts where precise, scaled measurements are necessary outside of static styling, such as in dynamic visual components or animations.
 
 ---
 
