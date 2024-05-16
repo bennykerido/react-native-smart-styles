@@ -1,16 +1,7 @@
 import {StyleSheet} from "react-native";
-import NamedStyles = StyleSheet.NamedStyles;
 import {getColor, hp, wp} from "./utils";
 import {normalizedProperties} from "./property-mapping";
-import {ColorValue, ImageStyle, ShadowStyleIOS, TextStyle, ViewStyle} from "../types/custom-types";
-
-/* ============= Types ============= */
-type Fonts = { fontFamily: string | undefined}
-type Colors = {[k: string]: ColorValue | string | undefined}
-type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle | Fonts | Colors | ShadowStyleIOS } & {
-    settings?: Record<string, any>
-};
-/* ============= Types ============= */
+import {NamedStyles} from "../types/global";
 
 function convertObject (object: Record<string, any>) {
     for (const key in object) {

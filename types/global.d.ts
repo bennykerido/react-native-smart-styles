@@ -11,14 +11,14 @@ import {Animated} from '../Animated/Animated';
 import {ImageResizeMode} from '../Image/ImageResizeMode';
 import {ColorValue} from './StyleSheet';
 
-type FlexAlignType =
+declare type FlexAlignType =
     | 'flex-start'
     | 'flex-end'
     | 'center'
     | 'stretch'
     | 'baseline';
 
-export type DimensionValue =
+declare type DimensionValue =
     | number
     | 'auto'
     | `w${number}`
@@ -26,15 +26,15 @@ export type DimensionValue =
     | `${number}%`
     | Animated.AnimatedNode
     | null;
-type AnimatableNumericValue = number | Animated.AnimatedNode;
-type AnimatableStringValue = string | Animated.AnimatedNode;
+declare type AnimatableNumericValue = number | Animated.AnimatedNode;
+declare type AnimatableStringValue = string | Animated.AnimatedNode;
 
 /**
  * Flex Prop Types
  * @see https://reactnative.dev/docs/flexbox
  * @see https://reactnative.dev/docs/layout-props
  */
-export interface FlexStyle {
+declare interface FlexStyle {
     alignContent?:
         | 'flex-start'
         | 'flex-end'
@@ -116,70 +116,70 @@ export interface FlexStyle {
     direction?: 'inherit' | 'ltr' | 'rtl' | undefined;
 }
 
-export interface ShadowStyleIOS {
+declare interface ShadowStyleIOS {
     shadowColor?: ColorValue | undefined;
     shadowOffset?: Readonly<{width: number; height: number}> | undefined;
     shadowOpacity?: AnimatableNumericValue | undefined;
     shadowRadius?: number | undefined;
 }
 
-interface PerpectiveTransform {
+declare interface PerpectiveTransform {
     perspective: AnimatableNumericValue;
 }
 
-interface RotateTransform {
+declare interface RotateTransform {
     rotate: AnimatableStringValue;
 }
 
-interface RotateXTransform {
+declare interface RotateXTransform {
     rotateX: AnimatableStringValue;
 }
 
-interface RotateYTransform {
+declare interface RotateYTransform {
     rotateY: AnimatableStringValue;
 }
 
-interface RotateZTransform {
+declare interface RotateZTransform {
     rotateZ: AnimatableStringValue;
 }
 
-interface ScaleTransform {
+declare interface ScaleTransform {
     scale: AnimatableNumericValue;
 }
 
-interface ScaleXTransform {
+declare interface ScaleXTransform {
     scaleX: AnimatableNumericValue;
 }
 
-interface ScaleYTransform {
+declare interface ScaleYTransform {
     scaleY: AnimatableNumericValue;
 }
 
-interface TranslateXTransform {
+declare interface TranslateXTransform {
     translateX: AnimatableNumericValue;
 }
 
-interface TranslateYTransform {
+declare interface TranslateYTransform {
     translateY: AnimatableNumericValue;
 }
 
-interface SkewXTransform {
+declare interface SkewXTransform {
     skewX: AnimatableStringValue;
 }
 
-interface SkewYTransform {
+declare interface SkewYTransform {
     skewY: AnimatableStringValue;
 }
 
-interface MatrixTransform {
+declare interface MatrixTransform {
     matrix: AnimatableNumericValue[];
 }
 
-type MaximumOneOf<T, K extends keyof T = keyof T> = K extends keyof T
+declare type MaximumOneOf<T, K extends keyof T = keyof T> = K extends keyof T
     ? {[P in K]: T[K]} & {[P in Exclude<keyof T, K>]?: never}
     : never;
 
-export interface TransformsStyle {
+declare interface TransformsStyle {
     transform?:
         | MaximumOneOf<
         PerpectiveTransform &
@@ -229,7 +229,7 @@ export interface TransformsStyle {
 /**
  * @see https://reactnative.dev/docs/view#style
  */
-export interface ViewStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
+declare interface ViewStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
     backfaceVisibility?: 'visible' | 'hidden' | undefined;
     backgroundColor?: ColorValue | undefined;
     borderBlockColor?: ColorValue | undefined;
@@ -277,7 +277,7 @@ export interface ViewStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
     pointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto' | undefined;
 }
 
-export type FontVariant =
+declare type FontVariant =
     | 'small-caps'
     | 'oldstyle-nums'
     | 'lining-nums'
@@ -291,21 +291,21 @@ export type FontVariant =
     | 'no-historical-ligatures'
     | 'contextual'
     | 'no-contextual';
-export interface TextStyleIOS extends ViewStyle {
+declare interface TextStyleIOS extends ViewStyle {
     fontVariant?: FontVariant[] | undefined;
     textDecorationColor?: ColorValue | undefined;
     textDecorationStyle?: 'solid' | 'double' | 'dotted' | 'dashed' | undefined;
     writingDirection?: 'auto' | 'ltr' | 'rtl' | undefined;
 }
 
-export interface TextStyleAndroid extends ViewStyle {
+declare interface TextStyleAndroid extends ViewStyle {
     textAlignVertical?: 'auto' | 'top' | 'bottom' | 'center' | undefined;
     verticalAlign?: 'auto' | 'top' | 'bottom' | 'middle' | undefined;
     includeFontPadding?: boolean | undefined;
 }
 
 // @see https://reactnative.dev/docs/text#style
-export interface TextStyle extends TextStyleIOS, TextStyleAndroid, ViewStyle {
+declare interface TextStyle extends TextStyleIOS, TextStyleAndroid, ViewStyle {
     color?: ColorValue | undefined;
     fontFamily?: string | undefined;
     fontSize?: number | undefined;
@@ -350,7 +350,7 @@ export interface TextStyle extends TextStyleIOS, TextStyleAndroid, ViewStyle {
  * Image style
  * @see https://reactnative.dev/docs/image#style
  */
-export interface ImageStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
+declare interface ImageStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
     resizeMode?: ImageResizeMode | undefined;
     backfaceVisibility?: 'visible' | 'hidden' | undefined;
     borderBottomLeftRadius?: AnimatableNumericValue | undefined;
@@ -367,5 +367,13 @@ export interface ImageStyle extends FlexStyle, ShadowStyleIOS, TransformsStyle {
     objectFit?: 'cover' | 'contain' | 'fill' | 'scale-down' | undefined;
 }
 
-type OpaqueColorValue = symbol & { __TYPE__: "Color" };
-export type ColorValue = string | OpaqueColorValue;
+declare type OpaqueColorValue = symbol & { __TYPE__: "Color" };
+declare type ColorValue = string | OpaqueColorValue;
+
+
+declare type Fonts = { fontFamily: string | undefined}
+declare type Colors = {[k: string]: ColorValue | string | undefined}
+
+declare type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle | Fonts | Colors | ShadowStyleIOS } & {
+    settings?: Record<string, any>
+};
