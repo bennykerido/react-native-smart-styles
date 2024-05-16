@@ -1,10 +1,16 @@
 import {Appearance, Dimensions, PixelRatio} from "react-native";
 import config from '../../config.js';
 import getColorScheme = Appearance.getColorScheme;
+import {MMKV} from 'react-native-mmkv';
 
 const { width, height } = Dimensions.get("window");
 const shorter = Math.min(width, height);
 const longer = Math.max(width, height);
+export const storageInstance = new MMKV({
+    id: "react-native-smart-styles",
+    path: `react-native-smart-styles/settings`,
+    encryptionKey: 'RNSS',
+});
 
 const baseWidth = 375;
 const baseHeight = 812;
@@ -16,7 +22,7 @@ type Settings = {
 const settings: Settings = {
     fontFamilies: config?.fonts ?? {},
     colorsPalette: config?.colors ?? {},
-    theme: getColorScheme() as 'dark' | 'light',
+    theme: (storageInstance.getString('theme') ?? getColorScheme()) as 'dark' | 'light',
 }
 
 function getDeviceBaseScale() {
@@ -41,7 +47,7 @@ export function getFont(fontFamily: string) {
 }
 
 export function getColor(value: string) {
-    const theme = getColorScheme();
+    const theme = settings.theme;
     const isDarkTheme = theme === "dark";
     const re = /(?:d|l|D|L)\((.*?)\)(?:\s*,\s*(?:d|l|D|L)\((.*?)\))?/;
     const isMultiTheme = value.match(re);
@@ -56,9 +62,17 @@ export function getColor(value: string) {
     const palette = settings.colorsPalette;
     return palette[value] ? palette[value] : value;
 }
+
+export function toggleTheme() {
+    const isDarkTheme = storageInstance.getString('theme') === 'dark';
+    const newTheme = isDarkTheme ? 'light' : 'dark';
+    storageInstance.set("theme", newTheme);
+    settings.theme = newTheme;
+}
+
+
 export const themeColor = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 export const tc = (lightColor: string, darkColor: string) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
-export const setTheme = (theme: 'dark' | 'light') => (settings.theme = theme);
 export const getTheme = () => settings.theme;
 export const widthPixel = (value: number, round = false) => normalize(value, true, round);
 export const heightPixel = (value: number, round = false) => normalize(value, false, round);

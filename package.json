@@ -46,5 +46,8 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
+  },
+  "dependencies": {
+    "react-native-mmkv": "^2.12.2"
   }
 }
