@@ -1,6 +1,10 @@
-[![NPM Version](https://img.shields.io/npm/v/react-native-smart-styles.svg?style=flat)]()[![NPM Downloads](https://img.shields.io/npm/d18m/react-native-smart-styles.svg?style=flat)]()[![NPM License](https://img.shields.io/npm/l/react-native-smart-styles.svg?style=flat)](https://github.com/bennykerido/react-native-smart-styles/blob/main/LICENSE.md)
+[!["Buy Me A Coffee"](https://img.shields.io/badge/%F0%9F%8D%BABuy%20Me%20A%20Beer-black.svg)](https://www.buymeacoffee.com/bennykerido)&nbsp;
+[![NPM Version](https://img.shields.io/npm/v/react-native-smart-styles.svg?style=flat)]()&nbsp;
+[![NPM Downloads](https://img.shields.io/npm/d18m/react-native-smart-styles.svg?style=flat)]()&nbsp;
+[![NPM License](https://img.shields.io/npm/l/react-native-smart-styles.svg?style=flat)](https://github.com/bennykerido/react-native-smart-styles/blob/main/LICENSE.md)
 ![Logo](https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS.png?raw=true)
 [![NPM](https://nodei.co/npm/react-native-smart-styles.png?downloads=true)](https://www.npmjs.com/package/react-native-smart-styles)
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Installation](#installation)
@@ -102,8 +106,6 @@ const unformattedStyles = SmartStyles.helper({
 });
 ```
 
-To reflect the specific usage requirements of the `themeColor` and `tc` functions, here's an updated description for your README that includes these important details:
-
 ---
 
 ### `themeColor(lightColor, darkColor)` / `tc(lightColor, darkColor)`
@@ -130,7 +132,7 @@ const styles = SmartStyles.create({
 // The styles object now contains theme-aware properties that adapt based on the active color scheme.
 ```
 
-By integrating these functions directly into your style creation process and forwarding them into `useTheme` (if using `SmartStyles.helper()`), you ensure that your application's visual elements adapt seamlessly to the current theme, providing a consistent and user-friendly experience.
+By integrating these functions directly into your style creation process and forwarding them into `useTheme` (forward only when using `SmartStyles.helper()`), you ensure that your application's visual elements adapt seamlessly to the current theme, providing a consistent and user-friendly experience.
 
 ---
 
@@ -200,7 +202,7 @@ import { hp } from 'react-native-smart-styles';
 const screenHeightPortion = hp(20, true); // Returns the height equivalent to 20 units on the current screen, rounded to the nearest whole number.
 ```
 
-These functions should not be used directly within stylesheet definitions to avoid double conversion of values. They are best utilized in contexts where precise, scaled measurements are necessary outside of static styling, such as in dynamic visual components or animations.
+These functions should not be used directly within `SmartStyles.create()` definitions to avoid double conversion of values. They are best utilized in contexts where precise, scaled measurements are necessary outside of static styling, such as in dynamic visual components or animations.
 
 ---
 
@@ -244,5 +246,3 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-This format should help you avoid any issues when you add the Markdown yourself later!
