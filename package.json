@@ -15,7 +15,8 @@
   },
   "files": [
     "*",
-    "!media"
+    "!media",
+    "!media/*"
   ],
   "keywords": [
     "react",
