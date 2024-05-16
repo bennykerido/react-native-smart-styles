@@ -12,11 +12,18 @@ const react_native_mmkv_1 = require("react-native-mmkv");
 const { width, height } = react_native_1.Dimensions.get("window");
 const shorter = Math.min(width, height);
 const longer = Math.max(width, height);
-exports.storageInstance = new react_native_mmkv_1.MMKV({
-    id: "react-native-smart-styles",
-    path: `react-native-smart-styles/settings`,
-    encryptionKey: 'RNSS',
-});
+exports.storageInstance = new react_native_mmkv_1.MMKV();
+function onAppStateChange(nextAppState) {
+    if (nextAppState === 'active') {
+        exports.storageInstance = new react_native_mmkv_1.MMKV({
+            id: "react-native-smart-styles",
+            path: `react-native-smart-styles/settings`,
+            encryptionKey: 'RNSS',
+        });
+        react_native_1.AppState.removeEventListener('change', onAppStateChange);
+    }
+}
+react_native_1.AppState.addEventListener('change', onAppStateChange);
 const baseWidth = 375;
 const baseHeight = 812;
 const settings = {
@@ -51,9 +58,9 @@ function getColor(value) {
     const isMultiTheme = value.match(re);
     if (isMultiTheme) {
         const isDarkFirst = value.charAt(0) === 'd';
-        const matches = value.match(re);
-        const darkColor = matches ? matches[isDarkFirst ? 1 : 2] : '';
-        const lightColor = matches ? matches[isDarkFirst ? 2 : 1] : '';
+        const matches = isMultiTheme;
+        const darkColor = matches[isDarkFirst ? 1 : 2];
+        const lightColor = matches[isDarkFirst ? 2 : 1];
         value = !isDarkTheme ? lightColor : darkColor;
     }
     const palette = settings.colorsPalette;
@@ -61,10 +68,10 @@ function getColor(value) {
 }
 exports.getColor = getColor;
 function toggleTheme() {
-    const isDarkTheme = exports.storageInstance.getString('theme') === 'dark';
+    const isDarkTheme = settings.theme === 'dark';
     const newTheme = isDarkTheme ? 'light' : 'dark';
-    exports.storageInstance.set("theme", newTheme);
     settings.theme = newTheme;
+    exports.storageInstance.set("theme", newTheme);
 }
 exports.toggleTheme = toggleTheme;
 const themeColor = (lightColor, darkColor) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;

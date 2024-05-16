@@ -1,4 +1,4 @@
-import {Appearance, Dimensions, PixelRatio} from "react-native";
+import {Appearance, Dimensions, PixelRatio, AppState} from "react-native";
 import config from '../../config.js';
 import getColorScheme = Appearance.getColorScheme;
 import {MMKV} from 'react-native-mmkv';
@@ -6,11 +6,19 @@ import {MMKV} from 'react-native-mmkv';
 const { width, height } = Dimensions.get("window");
 const shorter = Math.min(width, height);
 const longer = Math.max(width, height);
-export const storageInstance = new MMKV({
-    id: "react-native-smart-styles",
-    path: `react-native-smart-styles/settings`,
-    encryptionKey: 'RNSS',
-});
+
+export let storageInstance: MMKV = new MMKV();
+function onAppStateChange(nextAppState: string) {
+    if (nextAppState === 'active') {
+        storageInstance = new MMKV({
+            id: "react-native-smart-styles",
+            path: `react-native-smart-styles/settings`,
+            encryptionKey: 'RNSS',
+        });
+        AppState.removeEventListener('change', onAppStateChange);
+    }
+}
+AppState.addEventListener('change', onAppStateChange);
 
 const baseWidth = 375;
 const baseHeight = 812;
@@ -53,10 +61,10 @@ export function getColor(value: string) {
     const isMultiTheme = value.match(re);
     if (isMultiTheme) {
         const isDarkFirst = value.charAt(0) === 'd';
-        const matches = value.match(re);
-        const darkColor = matches ? matches[isDarkFirst ? 1 : 2] : '';
-        const lightColor = matches ? matches[isDarkFirst ? 2 : 1] : '';
-        value = !isDarkTheme ? lightColor : darkColor as any;
+        const matches = isMultiTheme;
+        const darkColor = matches[isDarkFirst ? 1 : 2];
+        const lightColor = matches[isDarkFirst ? 2 : 1];
+        value = !isDarkTheme ? lightColor : darkColor as string;
     }
 
     const palette = settings.colorsPalette;
@@ -64,10 +72,10 @@ export function getColor(value: string) {
 }
 
 export function toggleTheme() {
-    const isDarkTheme = storageInstance.getString('theme') === 'dark';
+    const isDarkTheme = settings.theme === 'dark';
     const newTheme = isDarkTheme ? 'light' : 'dark';
-    storageInstance.set("theme", newTheme);
     settings.theme = newTheme;
+    storageInstance.set("theme", newTheme);
 }
 
 

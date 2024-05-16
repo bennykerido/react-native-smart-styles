@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import {StyleSheet} from "react-native";
 import NamedStyles = StyleSheet.NamedStyles;
 import SmartStyles from "./SmartStyles";
-import {getTheme, storageInstance} from "./utils";
+import {storageInstance} from "./utils";
 import {useMMKVString} from "react-native-mmkv";
 
 export default function useTheme<T>(styles: NamedStyles<T>) {
