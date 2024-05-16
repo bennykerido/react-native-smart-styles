@@ -1,4 +1,4 @@
-import {Appearance, Dimensions, PixelRatio, AppState} from "react-native";
+import {Appearance, Dimensions, PixelRatio} from "react-native";
 import config from '../../config.js';
 import getColorScheme = Appearance.getColorScheme;
 import {MMKV} from 'react-native-mmkv';
@@ -7,16 +7,8 @@ const { width, height } = Dimensions.get("window");
 const shorter = Math.min(width, height);
 const longer = Math.max(width, height);
 
-export let storageInstance: MMKV = new MMKV();
-const subscription = AppState.addEventListener('change', (nextAppState: string) => {
-    if (nextAppState === 'active') {
-        storageInstance = new MMKV({
-            id: "react-native-smart-styles",
-            path: `react-native-smart-styles/settings`,
-            encryptionKey: 'RNSS',
-        });
-        subscription.remove();
-    }
+export const storageInstance = new MMKV({
+    id: "react-native-smart-styles",
 });
 
 const baseWidth = 375;
