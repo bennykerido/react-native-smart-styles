@@ -8,17 +8,16 @@ const shorter = Math.min(width, height);
 const longer = Math.max(width, height);
 
 export let storageInstance: MMKV = new MMKV();
-function onAppStateChange(nextAppState: string) {
+const subscription = AppState.addEventListener('change', (nextAppState: string) => {
     if (nextAppState === 'active') {
         storageInstance = new MMKV({
             id: "react-native-smart-styles",
             path: `react-native-smart-styles/settings`,
             encryptionKey: 'RNSS',
         });
-        AppState.removeEventListener('change', onAppStateChange);
+        subscription.remove();
     }
-}
-AppState.addEventListener('change', onAppStateChange);
+});
 
 const baseWidth = 375;
 const baseHeight = 812;

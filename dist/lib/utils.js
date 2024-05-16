@@ -13,17 +13,16 @@ const { width, height } = react_native_1.Dimensions.get("window");
 const shorter = Math.min(width, height);
 const longer = Math.max(width, height);
 exports.storageInstance = new react_native_mmkv_1.MMKV();
-function onAppStateChange(nextAppState) {
+const subscription = react_native_1.AppState.addEventListener('change', (nextAppState) => {
     if (nextAppState === 'active') {
         exports.storageInstance = new react_native_mmkv_1.MMKV({
             id: "react-native-smart-styles",
             path: `react-native-smart-styles/settings`,
             encryptionKey: 'RNSS',
         });
-        react_native_1.AppState.removeEventListener('change', onAppStateChange);
+        subscription.remove();
     }
-}
-react_native_1.AppState.addEventListener('change', onAppStateChange);
+});
 const baseWidth = 375;
 const baseHeight = 812;
 const settings = {
