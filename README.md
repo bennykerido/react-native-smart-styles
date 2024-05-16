@@ -3,7 +3,6 @@
 [![NPM Downloads](https://img.shields.io/npm/d18m/react-native-smart-styles.svg?style=flat)]()&nbsp;
 [![NPM License](https://img.shields.io/npm/l/react-native-smart-styles.svg?style=flat)](https://github.com/bennykerido/react-native-smart-styles/blob/main/LICENSE.md)
 ![Logo](https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS.png?raw=true)
-[![NPM](https://nodei.co/npm/react-native-smart-styles.png?downloads=true)](https://www.npmjs.com/package/react-native-smart-styles)
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -30,7 +29,12 @@ To install the package, run the following command in your terminal:
 npm install react-native-smart-styles
 # or
 yarn add react-native-smart-styles
+
+# after install
+pod install
 ```
+
+> **Note:** If you're facing any issues related to MMKV please refer to `react-native-mmkv` docs for more native installations at https://github.com/mrousavy/react-native-mmkv/blob/master/README.md
 
 ---
 
