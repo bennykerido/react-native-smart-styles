@@ -8,7 +8,10 @@
 &nbsp;
 [![Mimified Size](https://badgen.net/bundlephobia/min/react-native-smart-styles?color=cyan&labelColor=black&label=Minified%20Size&cache=300&scale=1.1)](https://github.com/bennykerido/react-native-smart-styles/blob/main/LICENSE.md)
 &nbsp;
-![Logo](https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS.png?raw=true)
+
+<p align="center">
+    <img src="https://github.com/bennykerido/react-native-smart-styles/blob/bennykerido-patch-1/media/RNSS-Transparent.png?raw=true" alt="Logo" />
+</p>
 
 ---
 ## Table of Contents
