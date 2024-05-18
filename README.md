@@ -10,7 +10,7 @@
 &nbsp;
 
 <p align="center">
-    <img src="https://github.com/bennykerido/react-native-smart-styles/blob/bennykerido-patch-1/media/RNSS-Transparent.png?raw=true" alt="Logo" />
+    <img src="https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS-Transparent.png?raw=true" alt="Logo" />
 </p>
 
 ---
