@@ -10,23 +10,27 @@
 &nbsp;
 ![Logo](https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS.png?raw=true)
 
+---
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Installation](#installation)
-3. [Configuration](#configuration)
-4. [Usage](#usage)
-    - [Creating Styles](#creating-styles)
-    - [Helper Function](#helper-function)
-    - [themeColor / tc](#themecolorlightcolor-darkcolor--tclightcolor-darkcolor)
-    - [useTheme](#usethemestylesheet)
-    - [widthPixel / wp](#widthpixelvalue-round--wpvalue-round)
-    - [heightPixel / hp](#heightpixelvalue-round--hpvalue-round)
-    - [Overriding Default Conversion Methods](#overriding-default-conversion-methods)
-5. [Contributing](#contributing)
+1. [Installation](#installation)
+1. [Configuration](#configuration)
+1. [Usage](#usage)
+   1. [Creating Styles](#creating-styles)
+   1. [Helper Function](#helper-function)
+   1. [toggleTheme](#toggletheme)
+   1. [getTheme](#gettheme)
+   1. [themeColor / tc](#themecolorlightcolor-darkcolor--tclightcolor-darkcolor)
+   1. [useTheme](#usethemestylesheet)
+   1. [widthPixel / wp](#widthpixelvalue-round--wpvalue-round)
+   1. [heightPixel / hp](#heightpixelvalue-round--hpvalue-round)
+   1. [Overriding Default Conversion Methods](#overriding-default-conversion-methods)
+4. [Contributing](#contributing)
 
 
 <ul>
+<hr/>
 <li>
 
 ## Introduction
@@ -138,11 +142,10 @@ margin: 5,
 }
 });
 ```
+<hr/>
 </li><li>
 
 ### Theme Related Methods and Hook
- <details>
- <summary>Click to expand</summary>
   <ul>
   <li>
 
@@ -307,8 +310,6 @@ ensuring consistency across different user preferences for dark or light modes.
 
   </li>
   </ul>
-
-</details>
 <hr/>
 </li><li>
 
@@ -336,6 +337,7 @@ import {wp} from 'react-native-smart-styles';
 const screenWidthPortion = wp(50, true); // Returns the width equivalent to 50 units on the current screen, rounded to the nearest whole number.
 ```
 
+<hr/>
 </li><li>
 
 #### `heightPixel(value, round)` / `hp(value, round)`
@@ -364,6 +366,7 @@ These functions should not be used directly within `SmartStyles.create()` defini
 values. They are best utilized in contexts where precise, scaled measurements are necessary outside of static styling,
 such as in dynamic visual components or animations.
 
+<hr/>
 </li><li>
 
 ### Overriding Default Conversion Methods
