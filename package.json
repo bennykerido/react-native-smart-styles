@@ -1,6 +1,6 @@
 {
   "name": "react-native-smart-styles",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Smart stylesheets for React Native applications to design once and easy",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
     "stylesheet",
     "screen sizes"
   ],
-  "homepage": "https://www.github.com/bennykerido/react-native-smart-styles",
+  "homepage": "https://www.bennykerido.dev/react-native-smart-styles",
   "repository": {
     "type": "git",
     "url": "git://github.com/bennykerido/react-native-smart-styles.git"
