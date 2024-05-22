@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.formatStyles = void 0;
 const react_native_1 = require("react-native");
-const utils_1 = require("./utils");
-const property_mapping_1 = require("./property-mapping");
+const utils_1 = require("../react-native-smart-styles/lib/utils");
+const property_mapping_1 = require("../react-native-smart-styles/lib/property-mapping");
 function convertObject(object) {
     for (const key in object) {
         if (Array.isArray(object[key])) {
@@ -30,6 +30,9 @@ function convertValue(object, key) {
                 const shouldRound = (_c = ((_b = match[3]) === null || _b === void 0 ? void 0 : _b.toLowerCase()) === 'r') !== null && _c !== void 0 ? _c : false;
                 if (dimension && value) {
                     object[key] = dimension === 'h' ? (0, utils_1.hp)(value, shouldRound) : (0, utils_1.wp)(value, shouldRound);
+                }
+                else if (!dimension && !!value && shouldRound) {
+                    object[key] = property_mapping_1.normalizedProperties[key](value, true);
                 }
             }
         }
