@@ -15,7 +15,6 @@ const react_native_mmkv_1 = require("react-native-mmkv");
  *
  * @function
  * @name useThemeStyles
- * @param {Object} unformattedStyles - A stylesheet object created using `SmartStyles.helper()`.
  * @returns {Object} - A styles object formatted according to the current theme.
  *
  * @example
@@ -38,6 +37,7 @@ const react_native_mmkv_1 = require("react-native-mmkv");
  *     backgroundColor: tc('#fff', '#000'),
  *   },
  * });
+ * @param styles
  */
 function useThemeStyles(styles) {
     const [theme] = (0, react_native_mmkv_1.useMMKVString)('theme', utils_1.storageInstance);

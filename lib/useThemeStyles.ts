@@ -1,6 +1,4 @@
 import {useMemo} from 'react';
-import {StyleSheet} from "react-native";
-import NamedStyles = StyleSheet.NamedStyles;
 import SmartStyles from "./SmartStyles";
 import {storageInstance} from "./utils";
 import {useMMKVString} from "react-native-mmkv";
@@ -13,7 +11,6 @@ import {useMMKVString} from "react-native-mmkv";
  *
  * @function
  * @name useThemeStyles
- * @param {Object} unformattedStyles - A stylesheet object created using `SmartStyles.helper()`.
  * @returns {Object} - A styles object formatted according to the current theme.
  *
  * @example
@@ -36,6 +33,7 @@ import {useMMKVString} from "react-native-mmkv";
  *     backgroundColor: tc('#fff', '#000'),
  *   },
  * });
+ * @param styles
  */
 export default function useThemeStyles<T>(styles: NamedStyles<T>): NamedStyles<T>{
     const [theme] = useMMKVString('theme', storageInstance) as [SmartStylesTheme, any];
