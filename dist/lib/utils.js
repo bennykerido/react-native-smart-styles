@@ -8,7 +8,6 @@ exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.get
 const react_native_1 = require("react-native");
 const config_js_1 = __importDefault(require("../../config.js"));
 const react_native_mmkv_1 = require("react-native-mmkv");
-const global_1 = require("../types/global");
 var getColorScheme = react_native_1.Appearance.getColorScheme;
 const { width, height } = react_native_1.Dimensions.get("window");
 const shorter = Math.min(width, height);
@@ -91,8 +90,8 @@ exports.getColor = getColor;
  * export default ThemeSwitcher;
  */
 function toggleTheme() {
-    const isDarkTheme = settings.theme === global_1.SmartStylesTheme.DARK;
-    const newTheme = isDarkTheme ? global_1.SmartStylesTheme.LIGHT : global_1.SmartStylesTheme.DARK;
+    const isDarkTheme = settings.theme === SmartStylesTheme.DARK;
+    const newTheme = isDarkTheme ? SmartStylesTheme.LIGHT : SmartStylesTheme.DARK;
     settings.theme = newTheme;
     exports.storageInstance.set("theme", newTheme);
 }

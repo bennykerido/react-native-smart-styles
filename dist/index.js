@@ -15,8 +15,6 @@ Object.defineProperty(exports, "getTheme", { enumerable: true, get: function () 
 Object.defineProperty(exports, "toggleTheme", { enumerable: true, get: function () { return utils_1.toggleTheme; } });
 const SmartStyles_1 = __importDefault(require("./lib/SmartStyles"));
 exports.SmartStyles = SmartStyles_1.default;
-const global_1 = require("./types/global");
-Object.defineProperty(exports, "SmartStylesTheme", { enumerable: true, get: function () { return global_1.SmartStylesTheme; } });
 const useThemeStyles_1 = __importDefault(require("./lib/useThemeStyles"));
 exports.useThemeStyles = useThemeStyles_1.default;
 const useTheme_1 = __importDefault(require("./lib/useTheme"));

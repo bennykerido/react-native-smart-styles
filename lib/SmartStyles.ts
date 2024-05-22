@@ -1,7 +1,6 @@
 import {StyleSheet} from "react-native";
 import {getColor, hp, wp} from "./utils";
 import {normalizedProperties} from "./property-mapping";
-import {NamedStyles} from "../types/global";
 
 function convertObject (object: Record<string, any>) {
     for (const key in object) {

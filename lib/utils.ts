@@ -1,7 +1,6 @@
 import {Appearance, Dimensions, PixelRatio} from "react-native";
 import config from '../../config.js';
 import {MMKV} from 'react-native-mmkv';
-import {SmartStylesTheme} from "../types/global";
 import getColorScheme = Appearance.getColorScheme;
 
 const { width, height } = Dimensions.get("window");

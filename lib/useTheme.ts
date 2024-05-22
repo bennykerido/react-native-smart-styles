@@ -1,6 +1,5 @@
 import {storageInstance} from "./utils";
 import {useMMKVString} from "react-native-mmkv";
-import {SmartStylesTheme} from "../types/global";
 
 /**
  * React hook to listen to color theme changes.
