@@ -31,9 +31,6 @@ function convertValue(object, key) {
                 if (dimension) {
                     object[key] = dimension === 'h' ? (0, utils_1.hp)(value, shouldRound) : (0, utils_1.wp)(value, shouldRound);
                 }
-                else {
-                    object[key] = property_mapping_1.normalizedProperties[key](object[key], shouldRound);
-                }
             }
         }
     }

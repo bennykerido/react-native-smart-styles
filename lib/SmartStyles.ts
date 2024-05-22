@@ -29,8 +29,6 @@ function convertValue (object: Record<string, any>, key: string) {
                 const shouldRound = match[3]?.toLowerCase() === 'r' ?? false;
                 if (dimension) {
                     object[key] = dimension === 'h' ? hp(value,shouldRound) : wp(value,shouldRound);
-                } else {
-                    object[key] = normalizedProperties[key](object[key], shouldRound);
                 }
             }
         }
