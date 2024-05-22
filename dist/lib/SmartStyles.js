@@ -16,7 +16,7 @@ function convertObject(object) {
 }
 function convertValue(object, key) {
     var _a, _b, _c;
-    if (typeof property_mapping_1.normalizedProperties[key] === 'function') {
+    if (typeof property_mapping_1.normalizedProperties[key] === 'function' && !key.toLowerCase().includes('color')) {
         if (typeof object[key] === 'number' ||
             (typeof object[key] === "string" && key === 'fontFamily')) {
             object[key] = property_mapping_1.normalizedProperties[key](object[key]);

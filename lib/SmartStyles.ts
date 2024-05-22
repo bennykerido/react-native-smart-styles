@@ -15,7 +15,7 @@ function convertObject (object: Record<string, any>) {
 }
 
 function convertValue (object: Record<string, any>, key: string) {
-    if (typeof normalizedProperties[key] === 'function') {
+    if (typeof normalizedProperties[key] === 'function' && !key.toLowerCase().includes('color')) {
         if (typeof object[key] === 'number' ||
             (typeof object[key] === "string" && key === 'fontFamily')
         ) {
