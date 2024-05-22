@@ -47,13 +47,12 @@ export function getFont(fontFamily: string) {
 
 export function getColor(value: string) {
     const theme = settings.theme;
-    const searchRegex = /[dlDL]\(.*?\)/;
+    const searchRegex = /[dl]\(.*?\)/gi;
     const themeColors = value.match(searchRegex);
     if (themeColors) {
-        const colors = themeColors.slice(1);
-        const extractRegex = /[dlDL]\((.*?)\)/
+        const extractRegex = /[dl]\((.*?)\)/i;
         const extractedColors: Record<string, string> = {};
-        colors.forEach((color) => {
+        themeColors.forEach((color) => {
             if (color.toLowerCase().startsWith('d') || color.toLowerCase().startsWith('D')) {
                 const c = extractRegex.exec(color);
                 extractedColors.dark = c ? c[1] : '#CC0000';
