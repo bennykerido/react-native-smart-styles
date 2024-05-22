@@ -7,8 +7,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.getTheme = exports.tc = exports.themeColor = exports.toggleTheme = exports.getColor = exports.getFont = exports.storageInstance = void 0;
 const react_native_1 = require("react-native");
 const config_js_1 = __importDefault(require("../../config.js"));
-var getColorScheme = react_native_1.Appearance.getColorScheme;
 const react_native_mmkv_1 = require("react-native-mmkv");
+const global_1 = require("../types/global");
+var getColorScheme = react_native_1.Appearance.getColorScheme;
 const { width, height } = react_native_1.Dimensions.get("window");
 const shorter = Math.min(width, height);
 const longer = Math.max(width, height);
@@ -44,38 +45,207 @@ function getFont(fontFamily) {
 exports.getFont = getFont;
 function getColor(value) {
     const theme = settings.theme;
-    const isDarkTheme = theme === "dark";
-    const re = /(?:d|l|D|L)\((.*?)\)(?:\s*,\s*(?:d|l|D|L)\((.*?)\))?/;
-    const isMultiTheme = value.match(re);
-    if (isMultiTheme) {
-        const isDarkFirst = value.charAt(0) === 'd';
-        const matches = isMultiTheme;
-        const darkColor = matches[isDarkFirst ? 1 : 2];
-        const lightColor = matches[isDarkFirst ? 2 : 1];
-        value = !isDarkTheme ? lightColor : darkColor;
+    const searchRegex = /[dlDL]\(.*?\)/;
+    const themeColors = value.match(searchRegex);
+    if (themeColors) {
+        const colors = themeColors.slice(1);
+        const extractRegex = /[dlDL]\((.*?)\)/;
+        const extractedColors = {};
+        colors.forEach((color) => {
+            if (color.toLowerCase().startsWith('d') || color.toLowerCase().startsWith('D')) {
+                const c = extractRegex.exec(color);
+                extractedColors.dark = c ? c[1] : '#CC0000';
+            }
+            if (color.toLowerCase().startsWith('l') || color.toLowerCase().startsWith('L')) {
+                const c = extractRegex.exec(color);
+                extractedColors.light = c ? c[1] : '#CC0000';
+            }
+        });
+        value = extractedColors[theme];
     }
     const palette = settings.colorsPalette;
     return palette[value] ? palette[value] : value;
 }
 exports.getColor = getColor;
+/**
+ * Toggles the application's color theme.
+ *
+ * This function switches the current color theme between 'dark' and 'light'.
+ * It is typically used to allow users to switch themes dynamically within the application.
+ *
+ * @function
+ * @name toggleTheme
+ * @returns {void}
+ *
+ * @example
+ * import { toggleTheme } from 'react-native-smart-styles';
+ *
+ * const ThemeSwitcher = () => {
+ *   return (
+ *     <button onClick={toggleTheme}>
+ *       Toggle Theme
+ *     </button>
+ *   );
+ * };
+ *
+ * export default ThemeSwitcher;
+ */
 function toggleTheme() {
-    const isDarkTheme = settings.theme === 'dark';
-    const newTheme = isDarkTheme ? 'light' : 'dark';
+    const isDarkTheme = settings.theme === global_1.SmartStylesTheme.DARK;
+    const newTheme = isDarkTheme ? global_1.SmartStylesTheme.LIGHT : global_1.SmartStylesTheme.DARK;
     settings.theme = newTheme;
     exports.storageInstance.set("theme", newTheme);
 }
 exports.toggleTheme = toggleTheme;
+/**
+ * Generates a color string formatted for the current theme.
+ *
+ * This function takes two color strings as input: one for the light theme and one for the dark theme.
+ * It returns a formatted string that can be used with the theme formatter to apply the appropriate color
+ * based on the active theme.
+ *
+ * @function
+ * @name themeColor
+ * @param {string} lightColor - The color string for the light theme.
+ * @param {string} darkColor - The color string for the dark theme.
+ * @returns {string} - A formatted color string for the theme formatter.
+ *
+ * @example
+ * import { themeColor } from 'react-native-smart-styles';
+ *
+ * const color = themeColor('#ffffff', '#000000');
+ * console.log(`Formatted color: ${color}`);
+ */
 const themeColor = (lightColor, darkColor) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 exports.themeColor = themeColor;
+/**
+ * Generates a color string formatted for the current theme.
+ *
+ * This function takes two color strings as input: one for the light theme and one for the dark theme.
+ * It returns a formatted string that can be used with the theme formatter to apply the appropriate color
+ * based on the active theme.
+ *
+ * @function
+ * @name tc
+ * @param {string} lightColor - The color string for the light theme.
+ * @param {string} darkColor - The color string for the dark theme.
+ * @returns {string} - A formatted color string for the theme formatter.
+ *
+ * @example
+ * import { tc } from 'react-native-smart-styles';
+ *
+ * const color = tc('#ffffff', '#000000');
+ * console.log(`Formatted color: ${color}`);
+ */
 const tc = (lightColor, darkColor) => `d(${darkColor.toString()}), l(${lightColor.toString()})`;
 exports.tc = tc;
+/**
+ * Retrieves the current color theme of the application.
+ *
+ * This function returns the current theme, which can be either 'dark' or 'light'.
+ * It is useful for determining the active theme within the application.
+ *
+ * @function
+ * @name getTheme
+ * @returns {SmartStylesTheme} - The current theme, either 'dark' or 'light'.
+ *
+ * @example
+ * import { getTheme } from 'path-to-your-function';
+ *
+ * const currentTheme = getTheme();
+ * console.log(`The current theme is: ${currentTheme}`);
+ */
 const getTheme = () => settings.theme;
 exports.getTheme = getTheme;
+/**
+ * Calculates a value relative to the device's width.
+ *
+ * This function takes a number and an optional parameter to determine if the result should be rounded.
+ * It returns a value that is calculated relative to the device's width.
+ *
+ * @function
+ * @name widthPixel
+ * @param {number} value - The number to be converted relative to the device's width.
+ * @param {boolean} [round=false] - Optional parameter to determine if the result should be rounded.
+ * @returns {number} - The calculated value relative to the device's width.
+ *
+ * @example
+ * import { widthPixel } from 'react-native-smart-styles';
+ *
+ * const widthValue = widthPixel(100);
+ * console.log(`Calculated width: ${widthValue}`);
+ *
+ * const roundedWidthValue = widthPixel(100, true);
+ * console.log(`Calculated and rounded width: ${roundedWidthValue}`);
+ */
 const widthPixel = (value, round = false) => normalize(value, true, round);
 exports.widthPixel = widthPixel;
+/**
+ * Calculates a value relative to the device's height.
+ *
+ * This function takes a number and an optional parameter to determine if the result should be rounded.
+ * It returns a value that is calculated relative to the device's height.
+ *
+ * @function
+ * @name heightPixel
+ * @param {number} value - The number to be converted relative to the device's height.
+ * @param {boolean} [round=false] - Optional parameter to determine if the result should be rounded.
+ * @returns {number} - The calculated value relative to the device's height.
+ *
+ * @example
+ * import { heightPixel } from 'react-native-smart-styles';
+ *
+ * const heightValue = heightPixel(100);
+ * console.log(`Calculated height: ${heightValue}`);
+ *
+ * const roundedHeightValue = heightPixel(100, true);
+ * console.log(`Calculated and rounded height: ${roundedHeightValue}`);
+ */
 const heightPixel = (value, round = false) => normalize(value, false, round);
 exports.heightPixel = heightPixel;
+/**
+ * Calculates a value relative to the device's width.
+ *
+ * This function takes a number and an optional parameter to determine if the result should be rounded.
+ * It returns a value that is calculated relative to the device's width.
+ *
+ * @function
+ * @name wp
+ * @param {number} value - The number to be converted relative to the device's width.
+ * @param {boolean} [round=false] - Optional parameter to determine if the result should be rounded.
+ * @returns {number} - The calculated value relative to the device's width.
+ *
+ * @example
+ * import { wp } from 'react-native-smart-styles';
+ *
+ * const widthValue = wp(100);
+ * console.log(`Calculated width: ${widthValue}`);
+ *
+ * const roundedWidthValue = wp(100, true);
+ * console.log(`Calculated and rounded width: ${roundedWidthValue}`);
+ */
 const wp = (value, round = false) => (0, exports.widthPixel)(value, round);
 exports.wp = wp;
+/**
+ * Calculates a value relative to the device's height.
+ *
+ * This function takes a number and an optional parameter to determine if the result should be rounded.
+ * It returns a value that is calculated relative to the device's height.
+ *
+ * @function
+ * @name hp
+ * @param {number} value - The number to be converted relative to the device's height.
+ * @param {boolean} [round=false] - Optional parameter to determine if the result should be rounded.
+ * @returns {number} - The calculated value relative to the device's height.
+ *
+ * @example
+ * import { hp } from 'react-native-smart-styles';
+ *
+ * const heightValue = hp(100);
+ * console.log(`Calculated height: ${heightValue}`);
+ *
+ * const roundedHeightValue = hp(100, true);
+ * console.log(`Calculated and rounded height: ${roundedHeightValue}`);
+ */
 const hp = (value, round = false) => (0, exports.heightPixel)(value, round);
 exports.hp = hp;

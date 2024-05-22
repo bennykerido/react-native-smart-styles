@@ -377,3 +377,8 @@ declare type Colors = {[k: string]: ColorValue | string | undefined}
 declare type NamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle | Fonts | Colors | ShadowStyleIOS } & {
     settings?: Record<string, any>
 };
+
+declare enum SmartStylesTheme {
+    DARK = 'dark',
+    LIGHT = 'light',
+}

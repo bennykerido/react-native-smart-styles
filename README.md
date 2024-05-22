@@ -26,7 +26,7 @@
       1. [toggleTheme](#toggletheme)
       1. [getTheme](#gettheme)
       1. [themeColor / tc](#themecolorlightcolor-darkcolor--tclightcolor-darkcolor)
-      1. [useTheme](#usethemestylesheet)
+      1. [useThemeStyles](#usethemestylesheet)
    1. [widthPixel / wp](#widthpixelvalue-round--wpvalue-round)
    1. [heightPixel / hp](#heightpixelvalue-round--hpvalue-round)
    1. [Overriding Default Conversion Methods](#overriding-default-conversion-methods)
@@ -271,12 +271,12 @@ perform the same operation and can be used interchangeably.
   // The styles object now contains theme-aware properties that adapt based on the active color scheme.
   ```
 
-By integrating these functions directly into your style creation process and forwarding them into `useTheme` (forward
+By integrating these functions directly into your style creation process and forwarding them into `useThemeStyles` (forward
 only when using `SmartStyles.helper()`), you ensure that your application's visual elements adapt seamlessly to the
 current theme, providing a consistent and user-friendly experience.
   </li><li>
 
-#### `useTheme(stylesheet)`
+#### `useThemeStyles(stylesheet)`
 This hook takes a stylesheet (ideally created using `SmartStyles.helper()`) and returns a formatted stylesheet that
 adapts to the active color scheme (either 'dark' or 'light').
 
@@ -289,10 +289,10 @@ adapts to the active color scheme (either 'dark' or 'light').
 
 ##### Example:
   ```javascript
-  import { useTheme, tc } from 'react-native-smart-styles';
+  import { useThemeStyles, tc } from 'react-native-smart-styles';
 
   const Component = (props) => {
-      const styles = useTheme(themedStyles);
+      const styles = useThemeStyles(themedStyles);
       return (
         <View style={styles.container}/>
       );
