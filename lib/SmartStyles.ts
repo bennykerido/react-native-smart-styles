@@ -27,7 +27,7 @@ function convertValue (object: Record<string, any>, key: string) {
                 const dimension = match[1]?.toLowerCase();
                 const value = Number(match[2]);
                 const shouldRound = match[3]?.toLowerCase() === 'r' ?? false;
-                if (dimension) {
+                if (dimension && value) {
                     object[key] = dimension === 'h' ? hp(value,shouldRound) : wp(value,shouldRound);
                 }
             }

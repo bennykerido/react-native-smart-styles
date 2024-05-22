@@ -28,7 +28,7 @@ function convertValue(object, key) {
                 const dimension = (_a = match[1]) === null || _a === void 0 ? void 0 : _a.toLowerCase();
                 const value = Number(match[2]);
                 const shouldRound = (_c = ((_b = match[3]) === null || _b === void 0 ? void 0 : _b.toLowerCase()) === 'r') !== null && _c !== void 0 ? _c : false;
-                if (dimension) {
+                if (dimension && value) {
                     object[key] = dimension === 'h' ? (0, utils_1.hp)(value, shouldRound) : (0, utils_1.wp)(value, shouldRound);
                 }
             }
