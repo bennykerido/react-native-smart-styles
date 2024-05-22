@@ -6,7 +6,7 @@ var _a, _b, _c;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.getTheme = exports.tc = exports.themeColor = exports.toggleTheme = exports.getColor = exports.getFont = exports.storageInstance = void 0;
 const react_native_1 = require("react-native");
-const config_js_1 = __importDefault(require("../../config.js"));
+const config_js_1 = __importDefault(require("../config.js"));
 const react_native_mmkv_1 = require("react-native-mmkv");
 var getColorScheme = react_native_1.Appearance.getColorScheme;
 const { width, height } = react_native_1.Dimensions.get("window");
@@ -89,8 +89,8 @@ exports.getColor = getColor;
  * export default ThemeSwitcher;
  */
 function toggleTheme() {
-    const isDarkTheme = settings.theme === SmartStylesTheme.DARK;
-    const newTheme = isDarkTheme ? SmartStylesTheme.LIGHT : SmartStylesTheme.DARK;
+    const isDarkTheme = settings.theme === 'dark';
+    const newTheme = (isDarkTheme ? 'light' : 'dark');
     settings.theme = newTheme;
     exports.storageInstance.set("theme", newTheme);
 }

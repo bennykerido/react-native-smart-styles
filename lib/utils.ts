@@ -91,8 +91,8 @@ export function getColor(value: string) {
  * export default ThemeSwitcher;
  */
 export function toggleTheme(): void {
-    const isDarkTheme = settings.theme === SmartStylesTheme.DARK;
-    const newTheme = isDarkTheme ? SmartStylesTheme.LIGHT : SmartStylesTheme.DARK;
+    const isDarkTheme = settings.theme === 'dark';
+    const newTheme = (isDarkTheme ? 'light' : 'dark') as SmartStylesTheme;
     settings.theme = newTheme;
     storageInstance.set("theme", newTheme);
 }
