@@ -1,9 +1,8 @@
-"use strict";
-const fs = require('fs');
-const path = require('path');
-const configFileName = 'smart-styles.config.json';
+var fs = require('fs');
+var path = require('path');
+var configFileName = 'smart-styles.config.json';
 function findRootDir(startDir) {
-    let currentDir = startDir;
+    var currentDir = startDir;
     while (currentDir !== path.parse(currentDir).root) {
         if (fs.existsSync(path.join(currentDir, configFileName))) {
             return currentDir;
@@ -12,8 +11,9 @@ function findRootDir(startDir) {
     }
     return undefined;
 }
-function readConfigFile(rootDir, configFile = configFileName) {
-    const configPath = path.join(rootDir, configFile);
+function readConfigFile(rootDir, configFile) {
+    if (configFile === void 0) { configFile = configFileName; }
+    var configPath = path.join(rootDir, configFile);
     if (fs.existsSync(configPath)) {
         return fs.readFileSync(configPath, 'utf-8');
     }
@@ -22,12 +22,12 @@ function readConfigFile(rootDir, configFile = configFileName) {
     }
 }
 function writeToConfigFile(content) {
-    const outputPath = path.join(process.cwd(), 'config.js');
-    fs.writeFileSync(outputPath, `export default ${content};`);
+    var outputPath = path.join(process.cwd(), 'config.js');
+    fs.writeFileSync(outputPath, "export default ".concat(content, ";"));
 }
-const rootDir = findRootDir(process.cwd());
+var rootDir = findRootDir(process.cwd());
 if (rootDir) {
-    const config = readConfigFile(rootDir);
+    var config = readConfigFile(rootDir);
     writeToConfigFile(config);
 }
 else {

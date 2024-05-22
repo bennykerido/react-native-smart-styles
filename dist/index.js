@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toggleTheme = exports.getTheme = exports.widthPixel = exports.heightPixel = exports.wp = exports.hp = exports.tc = exports.themeColor = exports.useTheme = exports.SmartStyles = void 0;
+exports.SmartStylesTheme = exports.toggleTheme = exports.getTheme = exports.widthPixel = exports.heightPixel = exports.wp = exports.hp = exports.tc = exports.themeColor = exports.useTheme = exports.useThemeStyles = exports.SmartStyles = void 0;
 const utils_1 = require("./lib/utils");
 Object.defineProperty(exports, "themeColor", { enumerable: true, get: function () { return utils_1.themeColor; } });
 Object.defineProperty(exports, "tc", { enumerable: true, get: function () { return utils_1.tc; } });
@@ -15,5 +15,7 @@ Object.defineProperty(exports, "getTheme", { enumerable: true, get: function () 
 Object.defineProperty(exports, "toggleTheme", { enumerable: true, get: function () { return utils_1.toggleTheme; } });
 const SmartStyles_1 = __importDefault(require("./lib/SmartStyles"));
 exports.SmartStyles = SmartStyles_1.default;
+const useThemeStyles_1 = __importDefault(require("./lib/useThemeStyles"));
+exports.useThemeStyles = useThemeStyles_1.default;
 const useTheme_1 = __importDefault(require("./lib/useTheme"));
 exports.useTheme = useTheme_1.default;

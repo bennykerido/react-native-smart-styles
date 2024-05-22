@@ -19,18 +19,19 @@
 1. [Introduction](#introduction)
 1. [Installation](#installation)
 1. [Configuration](#configuration)
-1. [Usage](#usage)
+1. [API Reference](#api-reference)
    1. [Creating Styles](#creating-styles)
    1. [Helper Function](#helper-function)
    1. [Theme Related Methods And Hook](#theme-related-methods-and-hook)
       1. [toggleTheme](#toggletheme)
       1. [getTheme](#gettheme)
       1. [themeColor / tc](#themecolorlightcolor-darkcolor--tclightcolor-darkcolor)
-      1. [useTheme](#usethemestylesheet)
+      1. [useThemeStyles](#usethemestylesheet)
    1. [widthPixel / wp](#widthpixelvalue-round--wpvalue-round)
    1. [heightPixel / hp](#heightpixelvalue-round--hpvalue-round)
    1. [Overriding Default Conversion Methods](#overriding-default-conversion-methods)
-4. [Contributing](#contributing)
+1. [Migrating to v0.0.4](#migrating-to-v004)
+1. [Contributing](#contributing)
 
 
 <ul>
@@ -105,311 +106,55 @@ installations at https://github.com/mrousavy/react-native-mmkv/blob/master/READM
 <hr/>
 <li>
 
-## Usage
-<ul>
-    <li>
+## API Reference
+- [`SmartStyles.create()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/creating-styles#creating-styles)
+- [`SmartStyles.helper()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/creating-styles#helper-function)
+- **Theme Related**
+    - [`toggleTheme()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/theme-related#toggletheme)
+    - [`getTheme()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/theme-related#gettheme)
+    - [`themeColor()/tc()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/theme-related#themecolor--tc)
+    - [`useThemeStyles()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/theme-related#usethemestyles)
+    - [`useTheme()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/theme-related#usetheme)
+- [`widthPixel()`/`wp()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/utility-functions#widthpixel--wp)
+- [`heightPixel()`/`hp()`](https://www.bennykerido.dev/react-native-smart-styles/docs/api/utility-functions#heightpixel--hp)
+- [*Snippets*](https://www.bennykerido.dev/react-native-smart-styles/docs/snippets) ⁠
 
-### Importing
-First, import the `SmartStyles` from the package:
-```javascript
-import {SmartStyles} from 'react-native-smart-styles';
-```
-</li><li>
-
-### Creating Styles
-Use `SmartStyles.create()` to pass your styling object. This method formats the styles according to different screen
-sizes:
-```javascript
-const styles = SmartStyles.create({
-container: {
-flex: 1,
-justifyContent: 'center',
-alignItems: 'center',
-padding: 20,
-},
-title: {
-fontSize: 20,
-fontWeight: 'bold',
-}
-});
-```
-</li><li>
-
-### Helper Function
-`SmartStyles.helper()` assists in writing stylesheets by providing autocomplete features but does not format the
-styles:
-```javascript
-const unformattedStyles = SmartStyles.helper({
-button: {
-padding: 10,
-margin: 5,
-}
-});
-```
-<hr/>
-</li><li>
-
-### Theme Related Methods and Hook
-  <ul>
-  <li>
-
-#### `toggleTheme()`
-The `toggleTheme()` function allows you to programmatically toggle the theme of your application between 'dark' and '
-light' modes. This function can be easily imported from the `react-native-smart-styles` module and used within your
-application to enhance the user
-experience by providing theme-switching capabilities.
-
-##### Importing and Usage
-
-You can import and use `toggleTheme()` as follows:
-
-  ```javascript
-  import { toggleTheme } from 'react-native-smart-styles';
-  // Toggle between 'dark' and 'light' theme
-  toggleTheme();
-  ```
-
-##### Example
-Here's an example of how you might use `toggleTheme()` in a button click handler to allow users to switch themes:
-
-  ```javascript
-  import React from 'react';
-  import { Button } from 'react-native';
-  import { toggleTheme } from 'react-native-smart-styles';
-
-  const ThemeToggleButton = () => {
-   return (
-     <Button
-       title="Toggle Theme"
-       onPress={() => toggleTheme()}
-     />
-   );
-  };
-
-  export default ThemeToggleButton;
-  ```
-This function is particularly useful in apps where users might prefer different themes under different conditions (
-e.g., darker themes at night).
-   </li><li>
-
-#### `getTheme()`
-
-The `getTheme()` function allows you to retrieve the currently active theme within your application, enabling you to
-make conditional decisions based on whether the theme is set to 'dark' or 'light'. This function can be imported from
-the `react-native-smart-styles` module.
-
-##### Importing and Usage
-
-You can import and use `getTheme()` as follows:
-
-  ```javascript
-  import { getTheme } from 'react-native-smart-styles';
-
-  // Retrieve the current theme
-  const currentTheme = getTheme();
-  console.log(currentTheme); // Outputs: 'dark' or 'light'
-  ```
-
-##### Example
-
-Here's an example of how you might use `getTheme()` to conditionally apply styles based on the current theme:
-
-  ```javascript
-  import React from 'react';
-  import { Text, View } from 'react-native';
-  import { getTheme } from 'react-native-smart-styles';
-
-  const ThemedText = () => {
-     const theme = getTheme();
-     const textStyle = {
-       color: theme === 'dark' ? '#FFF' : '#000',
-       backgroundColor: theme === 'dark' ? '#333' : '#CCC'
-     };
-
-     return (
-       <View style={{ padding: 20 }}>
-         <Text style={textStyle}>This text style changes with the theme!</Text>
-       </View>
-     );
-  };
-
-  export default ThemedText;
-  ```
-
-This method is especially useful for applications that need to dynamically adjust their appearance based on the
-current theme settings, enhancing the user interface's adaptability and responsiveness.
-  </li><li>
-
-#### `themeColor(lightColor, darkColor)` / `tc(lightColor, darkColor)`
-These functions dynamically specify colors based on the active color scheme and must be used
-within `SmartStyles.create()` or `SmartStyles.helper()` to ensure proper functionality. Both `themeColor` and `tc`
-perform the same operation and can be used interchangeably.
-
-- **Parameters:**
-
-    |   Argument   |   Type   | Required | Default Value | Description                                                       |
-    |:------------:|:--------:|:--------:|:-------------:|:------------------------------------------------------------------|
-    | `lightColor` | `string` |    ✅     |    (none)     | The color to be used in the light color scheme.         |
-    |   `darkColor`    | `string` |    ✅     |    (none)     | The color to be used in the dark color scheme. |
-
-- **Returns:** A color string that corresponds to the active color scheme, but only when called
-  within `SmartStyles.create()` or `SmartStyles.helper()`.
-
-##### Example:
-  ```javascript
-  import {SmartStyles, themeColor, tc} from 'react-native-smart-styles';
-
-  const styles = SmartStyles.create({
-      container: {
-          backgroundColor: tc('#fff', '#333'),  // Light mode: white, Dark mode: dark grey
-      },
-      text: {
-          color: themeColor('#000', '#fff'),  // Light mode: black, Dark mode: white
-      },
-  });
-
-  // The styles object now contains theme-aware properties that adapt based on the active color scheme.
-  ```
-
-By integrating these functions directly into your style creation process and forwarding them into `useTheme` (forward
-only when using `SmartStyles.helper()`), you ensure that your application's visual elements adapt seamlessly to the
-current theme, providing a consistent and user-friendly experience.
-  </li><li>
-
-#### `useTheme(stylesheet)`
-This hook takes a stylesheet (ideally created using `SmartStyles.helper()`) and returns a formatted stylesheet that
-adapts to the active color scheme (either 'dark' or 'light').
-
-- **Parameters:**
-
-  |   Argument   |        Type        | Required | Default Value | Description                                    |
-  |:------------:|:------------------:|:--------:|:-------------:|:-----------------------------------------------|
-  | `stylesheet` | `NamedStyles<any>` |    ✅     |    (none)     | A style object created by `SmartStyles.helper()`.                                               |
-- **Returns:** A style object formatted according to the active color scheme.
-
-##### Example:
-  ```javascript
-  import { useTheme, tc } from 'react-native-smart-styles';
-
-  const Component = (props) => {
-      const styles = useTheme(themedStyles);
-      return (
-        <View style={styles.container}/>
-      );
-  };
-
-  const themedStyles = SmartStyles.helper({
-      container: {
-        padding: 20,
-      },
-      text: {
-        fontSize: 18,
-        color: tc('#fff', '#000'),
-      }
-  });
-  ```
-
-This function allows developers to seamlessly integrate theme-based styling in their React Native applications,
-ensuring consistency across different user preferences for dark or light modes.
-
-  </li>
-  </ul>
-<hr/>
-</li><li>
-
-#### `widthPixel(value, round)` / `wp(value, round)`
-
-These utility functions calculate and return a size value proportional to the current screen width. Both `widthPixel`
-and `wp` perform the same operation and can be used interchangeably. They are particularly useful for dynamic
-calculations outside of stylesheets, such as animations or layout calculations, ensuring correct scaling across
-different devices.
-
-- **Parameters:**
-
-    | Argument |   Type    | Required | Default Value | Description                                                       |
-    |:--------:|:---------:|:--------:|:-------------:|:------------------------------------------------------------------|
-    | `value`  | `number`  |    ✅     |    (none)     | The size value to be scaled according to the screen width         |
-    | `round`  | `boolean` |    ❌     |    `false`    | Whether to round the resulting value to the nearest whole number. |
-
-- **Returns:** A numeric value scaled proportionally to the screen width, optionally rounded.
-
-##### Example:
-
-```javascript
-import {wp} from 'react-native-smart-styles';
-
-const screenWidthPortion = wp(50, true); // Returns the width equivalent to 50 units on the current screen, rounded to the nearest whole number.
-```
-
-<hr/>
-</li><li>
-
-#### `heightPixel(value, round)` / `hp(value, round)`
-
-Similar to `widthPixel`, these functions calculate and return a size value proportional to the current screen height.
-Use `heightPixel` or `hp` to adjust dimensions based on the screen's height for precise layout and animation work.
-
-- **Parameters:**
-
-    | Argument |   Type    | Required | Default Value | Description                                                       |
-    |:--------:|:---------:|:--------:|:-------------:|:------------------------------------------------------------------|
-    | `value`  | `number`  |    ✅     |    (none)     | The size value to be scaled according to the screen height        |
-    | `round`  | `boolean` |    ❌     |    `false`    | Whether to round the resulting value to the nearest whole number. |
-
-- **Returns:** A numeric value scaled proportionally to the screen height, optionally rounded.
-
-##### Example:
-
-```javascript
-import {hp} from 'react-native-smart-styles';
-
-const screenHeightPortion = hp(20, true); // Returns the height equivalent to 20 units on the current screen, rounded to the nearest whole number.
-```
-
-These functions should not be used directly within `SmartStyles.create()` definitions to avoid double conversion of
-values. They are best utilized in contexts where precise, scaled measurements are necessary outside of static styling,
-such as in dynamic visual components or animations.
-
-<hr/>
-</li><li>
-
-### Overriding Default Conversion Methods
-
-`React Native Smart Styles` allows you to override the default conversion method for dimension properties such
-as `width` and `height`. By default, numerical values are scaled relative to the axis they're sitting on. However, you
-can specify a different scaling basis using prefixes:
-
-- **`h` Prefix**: Use this prefix to indicate that the value should be calculated relative to the screen height. For
-  instance, `h50` will calculate the value as 50 units relative to the height of the screen.
-
-- **`w` Prefix**: This prefix can be used when you want the value to explicitly be calculated based on the screen width,
-  which is useful when working with dimensions that must maintain consistent scaling with width.
-
-#### Example of Overriding Conversion
-
-When designing a UI element like a circle that needs to maintain its aspect ratio regardless of screen dimensions, you
-might specify:
-
-```javascript
-const styles = SmartStyles.create({
-    circle: {
-        width: 'h100',  // Ensures the width of the circle is always 100 units relative to the screen height
-        height: 100     // Automatically calculated relativly to the screen height
-    },
-    widthCircle: {
-        width: 100,     // Automatically calculated relativly to the screen width
-        height: 'w100'  // Ensures the height of the circle is always 100 units relative to the screen width
-    }
-});
-```
-
-This feature is particularly useful for maintaining design integrity across devices with varying aspect ratios and
-dimensions.
 </li>
-</ul>
-<hr/>
-</li>
+<li>
 
+## Migrating to v0.0.4
+If you previously used `useTheme` to obtain themed styles, you will need to replace it with `useThemeStyles` in your code. Here is an example of how to update your code:
+
+#### Before (v0.0.3)
+```javascript
+import { useTheme } from 'react-native-smart-styles';
+
+const MyComponent = () => {
+  const styles = useTheme(unformattedStyles); // Returns styles object
+  return <View style={styles.container}></View>;
+};
+```
+
+#### After (v0.0.4)
+```javascript
+import { useThemeStyles } from 'react-native-smart-styles';
+
+const MyComponent = () => {
+  const styles = useThemeStyles(unformattedStyles); // New hook for obtaining themed styles
+  return <View style={styles.container}></View>;
+};
+
+// If you need to access the theme directly:
+import { useTheme } from 'react-native-smart-styles';
+
+const MyOtherComponent = () => {
+  const theme = useTheme(); // Returns 'dark' or 'light'
+  return <Text>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</Text>;
+};
+```
+> **Note:** For more information please refer to the [docs](https://www.bennykerido.dev/react-native-smart-styles/docs/migration)
+
+</li>
 <li>
 
 ## Contributing
