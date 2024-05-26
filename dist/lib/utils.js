@@ -2,7 +2,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a, _b, _c;
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.getTheme = exports.tc = exports.themeColor = exports.toggleTheme = exports.getColor = exports.getFont = exports.storageInstance = void 0;
 const react_native_1 = require("react-native");
@@ -15,14 +15,15 @@ const longer = Math.max(width, height);
 exports.storageInstance = new react_native_mmkv_1.MMKV({
     id: "react-native-smart-styles",
 });
-const baseWidth = 375;
-const baseHeight = 812;
 const settings = {
     fontFamilies: (_a = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.fonts) !== null && _a !== void 0 ? _a : {},
     colorsPalette: (_b = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.colors) !== null && _b !== void 0 ? _b : {},
-    theme: ((_c = exports.storageInstance.getString('theme')) !== null && _c !== void 0 ? _c : getColorScheme()),
+    baseWidth: (_c = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.baseWidth) !== null && _c !== void 0 ? _c : 375,
+    baseHeight: (_d = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.baseHeight) !== null && _d !== void 0 ? _d : 812,
+    theme: ((_e = exports.storageInstance.getString('theme')) !== null && _e !== void 0 ? _e : getColorScheme()),
 };
 function getDeviceBaseScale() {
+    const { baseHeight, baseWidth } = settings;
     return {
         width: shorter / baseWidth,
         height: longer / baseHeight,
