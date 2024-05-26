@@ -12,6 +12,7 @@ switch (command) {
     case 'update':
         try {
             process.chdir(cliPath.dirname(__filename));
+            console.log(cliPath.dirname(__filename));
             console.log('Updating config file...');
             require('./dist/lib/initialization');
             console.log('Config file successfully updated');
