@@ -6,7 +6,7 @@ var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.hp = exports.wp = exports.heightPixel = exports.widthPixel = exports.getTheme = exports.tc = exports.themeColor = exports.toggleTheme = exports.getColor = exports.getFont = exports.storageInstance = void 0;
 const react_native_1 = require("react-native");
-const config_js_1 = __importDefault(require("../../config.js"));
+const config_1 = __importDefault(require("../config"));
 const react_native_mmkv_1 = require("react-native-mmkv");
 var getColorScheme = react_native_1.Appearance.getColorScheme;
 const { width, height } = react_native_1.Dimensions.get("window");
@@ -16,10 +16,10 @@ exports.storageInstance = new react_native_mmkv_1.MMKV({
     id: "react-native-smart-styles",
 });
 const settings = {
-    fontFamilies: (_a = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.fonts) !== null && _a !== void 0 ? _a : {},
-    colorsPalette: (_b = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.colors) !== null && _b !== void 0 ? _b : {},
-    baseWidth: (_c = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.baseWidth) !== null && _c !== void 0 ? _c : 375,
-    baseHeight: (_d = config_js_1.default === null || config_js_1.default === void 0 ? void 0 : config_js_1.default.baseHeight) !== null && _d !== void 0 ? _d : 812,
+    fontFamilies: (_a = config_1.default === null || config_1.default === void 0 ? void 0 : config_1.default.fonts) !== null && _a !== void 0 ? _a : {},
+    colorsPalette: (_b = config_1.default === null || config_1.default === void 0 ? void 0 : config_1.default.colors) !== null && _b !== void 0 ? _b : {},
+    baseWidth: (_c = config_1.default === null || config_1.default === void 0 ? void 0 : config_1.default.baseWidth) !== null && _c !== void 0 ? _c : 375,
+    baseHeight: (_d = config_1.default === null || config_1.default === void 0 ? void 0 : config_1.default.baseHeight) !== null && _d !== void 0 ? _d : 812,
     theme: ((_e = exports.storageInstance.getString('theme')) !== null && _e !== void 0 ? _e : getColorScheme()),
 };
 function getDeviceBaseScale() {

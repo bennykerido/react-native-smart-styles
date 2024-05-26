@@ -1,5 +1,5 @@
 import {Appearance, Dimensions, PixelRatio} from "react-native";
-import config from '../../config.js';
+import config from '../config';
 import {MMKV} from 'react-native-mmkv';
 import getColorScheme = Appearance.getColorScheme;
 

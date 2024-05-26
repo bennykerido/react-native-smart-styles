@@ -11,6 +11,7 @@ const command = args[0];
 switch (command) {
     case 'update':
         try {
+            console.log(process.cwd());
             process.chdir(cliPath.dirname(__filename));
             console.log(cliPath.dirname(__filename));
             console.log('Updating config file...');
