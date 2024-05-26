@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "prepublish": "npm run build",
-    "postinstall": "smart-styles update",
+    "postinstall": "node ./cli.js update",
     "build": "tsc",
     "lint": "eslint ."
   },
