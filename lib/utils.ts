@@ -11,20 +11,23 @@ export const storageInstance = new MMKV({
     id: "react-native-smart-styles",
 });
 
-const baseWidth = 375;
-const baseHeight = 812;
 type Settings = {
     fontFamilies: Record<string, string>,
     colorsPalette: Record<string, string>,
+    baseWidth: number,
+    baseHeight: number,
     theme: SmartStylesTheme,
 }
 const settings: Settings = {
     fontFamilies: config?.fonts ?? {},
     colorsPalette: config?.colors ?? {},
+    baseWidth: config?.baseWidth ?? 375,
+    baseHeight: config?.baseHeight ?? 812,
     theme: (storageInstance.getString('theme') ?? getColorScheme()) as SmartStylesTheme,
 }
 
 function getDeviceBaseScale() {
+    const {baseHeight, baseWidth} = settings;
     return {
         width: shorter / baseWidth,
         height: longer / baseHeight,
