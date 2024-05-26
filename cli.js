@@ -36,7 +36,6 @@ function setSettings() {
         let currentDir = startDir;
         while (currentDir !== path.parse(currentDir).root) {
             if (fs.existsSync(path.join(currentDir, configFileName))) {
-                console.log(currentDir);
                 return currentDir;
             }
             currentDir = path.dirname(currentDir); // Move one directory up
