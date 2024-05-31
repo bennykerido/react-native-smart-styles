@@ -38,12 +38,12 @@ function setSettings() {
       const packageDir = process.cwd();
       const projectRoot = findProjectRoot(packageDir);
       const rootConfigPath = path.join(projectRoot, configFileName);
-      let content = {};
+      let content = JSON.stringify({});
       if (fs.existsSync(rootConfigPath)) {
         content = fs.readFileSync(rootConfigPath, 'utf-8');
       }
-      const packageConfigPathCommon = path.join(packageDir, 'lib', 'commonjs','config', 'index.js');
-      const packageConfigPathModule = path.join(packageDir, 'lib', 'module','config', 'index.js');
+      const packageConfigPathCommon = path.join(__dirname, 'lib', 'commonjs','config', 'index.js');
+      const packageConfigPathModule = path.join(__dirname, 'lib', 'module','config', 'index.js');
       fs.writeFileSync(packageConfigPathCommon, `export default `.concat(content));
       fs.writeFileSync(packageConfigPathModule, `export default `.concat(content));
       console.log('Config file updated successfully');
