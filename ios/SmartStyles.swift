@@ -18,7 +18,6 @@ class SmartStyles: NSObject {
     let defaults = UserDefaults.standard
     let theme = defaults.string(forKey: "RNSSTheme") ?? "light"
     let otherTheme = theme == "light" ? "dark" : "light"
-    print(otherTheme)
     defaults.set(otherTheme, forKey: "RNSSTheme")
     resolve(otherTheme)
   }

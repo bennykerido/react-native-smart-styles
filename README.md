@@ -1,3 +1,5 @@
+<p align="center">
+
 [![Buy Me A Beer](https://badgen.net/static/buymeacoffee/Buy%20Me%20A%20Beer?icon=&label=&color=cyan&labelColor=black&cache=300&scale=1.1)](https://www.buymeacoffee.com/bennykerido)
 &nbsp;
 [![NPM Version](https://badgen.net/npm/v/react-native-smart-styles?icon=npm&color=cyan&labelColor=black&label=Package&cache=300&scale=1.1)](https://www.npmjs.com/package/react-native-smart-styles)
@@ -8,6 +10,8 @@
 &nbsp;
 [![Mimified Size](https://badgen.net/bundlephobia/min/react-native-smart-styles?color=cyan&labelColor=black&label=Minified%20Size&cache=300&scale=1.1)](https://github.com/bennykerido/react-native-smart-styles/blob/main/LICENSE.md)
 &nbsp;
+
+</p>
 
 <p align="center">
     <img src="https://github.com/bennykerido/react-native-smart-styles/blob/main/media/RNSS-Transparent.png?raw=true" alt="Logo" />
@@ -43,7 +47,7 @@ To install the package, run the following command in your terminal:
    npm install react-native-smart-styles
    # or
    yarn add react-native-smart-styles
-   
+
    # after install
    pod install
    ```
@@ -77,7 +81,7 @@ installations at https://github.com/mrousavy/react-native-mmkv/blob/master/READM
   ```
 </li>
 <li>
-    
+
 ### Updating Configuration with CLI
   If you need to update your configuration after installation or if the `smart-styles.config.json` file does not
   exist, you can use the provided CLI tool. Simply run the following command:

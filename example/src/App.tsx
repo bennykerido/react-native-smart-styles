@@ -9,7 +9,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>Active Theme: {theme}</Text>
+      <Text style={styles.text}>Active Theme: {theme}</Text>
       <Button
         onPress={toggleTheme}
         title={'Toggle Theme'}
@@ -23,6 +23,9 @@ const unformattedStyles = SmartStyles.helper({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: tc('black', 'white'),
+    backgroundColor: tc('white', 'black'),
   },
+  text: {
+    color: tc('black', 'white')
+  }
 });

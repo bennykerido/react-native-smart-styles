@@ -15,21 +15,25 @@ class SmartStylesModule(reactContext: ReactApplicationContext) :
     return NAME
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
-  @ReactMethod
-  fun multiply(a: Double, b: Double, promise: Promise) {
-    promise.resolve(a * b)
+  @ReactMethod()
+  fun getTheme(promise: Promise) {
+    val theme: String = sharedPreferences.getString("RNSSTheme", "light") ?: "light"
+    promise.resolve(theme)
   }
 
-  @ReactMethod
-  fun add(a: Double, b: Double, promise: Promise) {
-    promise.resolve(a + b)
+  @ReactMethod()
+  fun setTheme(theme: String) {
+    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+    editor.putString("RNSSTheme", theme)
+    editor.apply()
   }
 
-  @ReactMethod(isBlockingSynchronousMethod = true)
-  fun getTheme(): String {
-    return sharedPreferences.getString("RNSSTheme", "light") ? : "light"
+  @ReactMethod()
+  fun toggleTheme(promise: Promise) {
+    val theme: String = sharedPreferences.getString("RNSSTheme", "light") ?: "light"
+    val otherTheme: String = if (theme == "light") "dark" else "light"
+    setTheme(otherTheme)
+    promise.resolve(otherTheme)
   }
 
   companion object {
