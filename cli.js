@@ -42,8 +42,10 @@ function setSettings() {
       if (fs.existsSync(rootConfigPath)) {
         content = fs.readFileSync(rootConfigPath, 'utf-8');
       }
+      const packageConfigPathTypescript = path.join(__dirname, 'src', 'config', 'index.ts');
       const packageConfigPathCommon = path.join(__dirname, 'lib', 'commonjs','config', 'index.js');
       const packageConfigPathModule = path.join(__dirname, 'lib', 'module','config', 'index.js');
+      fs.writeFileSync(packageConfigPathTypescript, `export default `.concat(content,';'));
       fs.writeFileSync(packageConfigPathCommon, `export default `.concat(content));
       fs.writeFileSync(packageConfigPathModule, `export default `.concat(content));
       console.log('Config file updated successfully');
