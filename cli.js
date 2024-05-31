@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 const args = process.argv.slice(2);
-const cliPath = require('path');
-const path = require("path");
-const fs = require("fs");
+const fs = require('fs');
+const path = require('path');
 
 if (args.length === 0) {
     console.log('Usage: smart-styles update');
@@ -12,15 +11,7 @@ if (args.length === 0) {
 const command = args[0];
 switch (command) {
     case 'update':
-        try {
-            process.chdir(cliPath.join('node_modules/react-native-smart-styles'));
-            console.log('Updating config file...');
-            setSettings();
-            console.log('Config file successfully updated');
-        } catch (e) {
-            console.error(`Failed to change directory: ${e}`);
-            process.exit(1);
-        }
+        setSettings();
         break;
     default:
         console.log('Unknown Command');
@@ -32,40 +23,29 @@ switch (command) {
 function setSettings() {
     const configFileName = 'smart-styles.config.json';
 
-    function findRootDir(startDir) {
-        let currentDir = startDir;
-        while (currentDir !== path.parse(currentDir).root) {
-            if (fs.existsSync(path.join(currentDir, configFileName))) {
-                return currentDir;
-            }
-            currentDir = path.dirname(currentDir); // Move one directory up
-        }
-        return undefined;
+    function findProjectRoot(startDir) {
+      if (fs.existsSync(path.join(startDir, 'package.json'))) {
+        return startDir;
+      }
+      const parentDir = path.resolve(startDir, '..');
+      if (parentDir === startDir) {
+        throw new Error('Project root not found');
+      }
+      return findProjectRoot(parentDir);
     }
 
-    function readConfigFile(rootDir, configFile) {
-        if (configFile === void 0) { configFile = configFileName; }
-        const configPath = path.join(rootDir, configFile);
-        if (fs.existsSync(configPath)) {
-            return fs.readFileSync(configPath, 'utf-8');
-        }
-        else {
-            return {};
-        }
+    try {
+      const packageDir = process.cwd();
+      const projectRoot = findProjectRoot(packageDir);
+      const rootConfigPath = path.join(projectRoot, configFileName);
+      let content = {};
+      if (fs.existsSync(rootConfigPath)) {
+        content = fs.readFileSync(rootConfigPath, 'utf-8');
+      }
+      const packageConfigPath = path.join(packageDir, 'lib', 'config', 'index.js');
+      fs.writeFileSync(packageConfigPath, `export default `.concat(content));
+      console.log('Config file updated successfully');
+    } catch (error) {
+      console.error('Error updating config file:', error);
     }
-
-    function writeToConfigFile(content) {
-        const outputPath = path.join(process.cwd(), 'dist/config/index.js');
-        fs.writeFileSync(outputPath, "export default ".concat(content, ";"));
-    }
-
-    const rootDir = findRootDir(process.cwd());
-    if (rootDir) {
-        const config = readConfigFile(rootDir);
-        writeToConfigFile(config);
-    }
-    else {
-        writeToConfigFile('{}');
-    }
-
 }
