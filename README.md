@@ -51,9 +51,6 @@ To install the package, run the following command in your terminal:
    # after install
    pod install
    ```
-> **Note:** If you're facing any issues related to MMKV please refer to `react-native-mmkv` docs for more native
-installations at https://github.com/mrousavy/react-native-mmkv/blob/master/README.md
-
 </li>
 <hr/>
 
@@ -67,7 +64,7 @@ installations at https://github.com/mrousavy/react-native-mmkv/blob/master/READM
   You can customize font names and colors by creating a `smart-styles.config.json` file in the root of your project.
   This JSON file allows you to specify your preferences which will be automatically applied during the package
   installation. Here’s an example of what the file might look like:
-  ```json
+  ```javascript
   {
     "fonts": {
       "primary": "Arial",
@@ -76,7 +73,9 @@ installations at https://github.com/mrousavy/react-native-mmkv/blob/master/READM
     "colors": {
       "primary": "#333",
       "accent": "#007bff"
-    }
+    },
+    "baseWidth": 375,
+    "baseHeight": 812
   }
   ```
 </li>
@@ -117,6 +116,8 @@ installations at https://github.com/mrousavy/react-native-mmkv/blob/master/READM
 <li>
 
 ## Migrating to v0.0.4
+> **Note:** This is not the only migration process but this is the main one, for more information please refer to the [docs](https://www.bennykerido.dev/react-native-smart-styles/docs/migration)
+
 If you previously used `useTheme` to obtain themed styles, you will need to replace it with `useThemeStyles` in your code. Here is an example of how to update your code:
 
 #### Before (v0.0.3)
@@ -146,7 +147,6 @@ const MyOtherComponent = () => {
   return <Text>{theme === 'dark' ? 'Dark Mode' : 'Light Mode'}</Text>;
 };
 ```
-> **Note:** For more information please refer to the [docs](https://www.bennykerido.dev/react-native-smart-styles/docs/migration)
 
 </li>
 <li>
