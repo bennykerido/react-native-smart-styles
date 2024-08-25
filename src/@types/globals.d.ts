@@ -1,5 +1,3 @@
-import * as All from '../../index'
-import {type StyleProp, StyleSheet} from "react-native";
 declare global {
     /**
      * Copyright (c) Meta Platforms, Inc. and affiliates.
@@ -9,11 +7,9 @@ declare global {
      *
      * @format
      */
-
-    import {Animated} from '../Animated/Animated';
-    import {ImageResizeMode} from '../Image/ImageResizeMode';
-    import {ColorValue} from './StyleSheet';
-  import NamedStyles = StyleSheet.NamedStyles;
+  import {ColorValue} from 'react-native/modules/StyleSheet/StyleSheet';
+  import {Animated} from 'react-native/modules/Animated/Animated';
+  import {ImageResizeMode} from 'react-native/modules/Image/ImageResizeMode';
 
     type FlexAlignType =
         | 'flex-start'
@@ -371,18 +367,15 @@ declare global {
         objectFit?: 'cover' | 'contain' | 'fill' | 'scale-down' | undefined;
     }
 
-    type OpaqueColorValue = symbol & { __TYPE__: "Color" };
-    type ColorValue = string | OpaqueColorValue;
+    // type ComponentStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle | ColorValue };
 
-    type ComponentStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle | ColorValue };
-
-    type SmartStylesNamedStyles<T> = ComponentStyles<T> & {
-      settings?: Record<string, any>;
-    };
-
-    // type SmartStylesNamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle | Fonts | Colors | ShadowStyleIOS } & {
-    //     settings?: Record<string, any>
+    // type SmartStylesNamedStyles<T> = ComponentStyles<T> & {
+    //   settings?: Record<string, any>;
     // };
+
+    type SmartStylesNamedStyles<T> = { [P in keyof T]: ViewStyle | TextStyle | ImageStyle | Fonts | Colors | ShadowStyleIOS } & {
+        settings?: Record<string, any>
+    };
 
     enum SmartStylesTheme {
         DARK = 'dark',
