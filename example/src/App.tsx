@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {View, Text, Button} from 'react-native';
+import { View, Text, Button} from 'react-native';
 import {SmartStyles, tc, toggleTheme, useTheme, useThemeStyles} from "react-native-smart-styles";
 
 export default function App() {
@@ -26,6 +26,6 @@ const unformattedStyles = SmartStyles.helper({
     backgroundColor: tc('white', 'black'),
   },
   text: {
-    color: tc('black', 'white')
+    color: tc('black', 'white'),
   }
 });

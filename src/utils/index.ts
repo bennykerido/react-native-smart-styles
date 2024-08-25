@@ -1,6 +1,7 @@
 import {Dimensions, PixelRatio} from "react-native";
 import SmartStyles, {SmartStylesNativeModule} from "../smart-styles/SmartStyles";
 import settings from "../settings";
+import type { SmartStylesTheme } from '../@types/globals';
 
 
 const { width, height } = Dimensions.get("window");

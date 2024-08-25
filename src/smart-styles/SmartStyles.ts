@@ -1,7 +1,8 @@
-import {StyleSheet, NativeModules, Platform} from "react-native";
+import { StyleSheet, NativeModules, Platform } from 'react-native';
 import {getColor, hp, wp} from "../utils";
 import {normalizedProperties} from "../mapping";
 import settings from "../settings";
+import type { SmartStylesNamedStyles, SmartStylesThemeListener, ThemeListener } from '../@types/globals';
 
 const LINKING_ERROR =
   `The package 'react-native-smart-styles' doesn't seem to be linked. Make sure: \n\n` +
@@ -60,7 +61,7 @@ function convertValue (object: Record<string, any>, key: string) {
     }
 }
 
-export function formatStyles<T>(styles: SmartStylesNamedStyles<T>) {
+export function formatStyles<T extends SmartStylesNamedStyles>(styles: T) {
     const res = JSON.parse(JSON.stringify(styles));
     for (const key in res) {
         convertObject(res[key]);
@@ -98,7 +99,7 @@ class SmartStylesClass {
    *   },
    * });
    */
-  create<T>(styleSheet: SmartStylesNamedStyles<T>): SmartStylesNamedStyles<T> {
+  create<T extends SmartStylesNamedStyles>(styleSheet: T): T {
     return StyleSheet.create(formatStyles(styleSheet))
   }
 
@@ -119,7 +120,7 @@ class SmartStylesClass {
    *   },
    * });
    */
-  helper<T>(styleSheet: SmartStylesNamedStyles<T>): SmartStylesNamedStyles<T> {
+  helper<T extends SmartStylesNamedStyles>(styleSheet: T): T {
     return styleSheet;
   }
 
@@ -152,7 +153,6 @@ class SmartStylesClass {
     }
     return res.join('');
   }
-
 }
 
 const SmartStyles = new SmartStylesClass();

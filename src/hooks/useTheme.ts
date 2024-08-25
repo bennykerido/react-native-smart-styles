@@ -1,6 +1,7 @@
 import React from 'react';
 import SmartStyles from "../smart-styles/SmartStyles";
 import {getTheme} from "../utils";
+import type { SmartStylesTheme } from '../@types/globals';
 
 /**
  * React hook to listen to color theme changes.

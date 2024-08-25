@@ -1,9 +1,6 @@
 # Changelog
 
-## v0.1.5
-### Added
-- Native module added in exchange for the `react-native-mmkv` package
-- `baseWidth` and `baseHeight` properties to the config file to set default width and height for calculations
+## v0.1.6
 
-### Changed
-- Refactored CLI functionality
+### Fixed
+- Types and autocomplete for stylesheet properties
