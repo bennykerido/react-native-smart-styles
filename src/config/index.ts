@@ -1,1 +1,1 @@
-export default {} as ConfigFile;
+export default {};

@@ -1,6 +1,9 @@
 import {useMemo} from 'react';
 import SmartStyles from "../smart-styles/SmartStyles";
 import useTheme from "./useTheme";
+import type { SmartStylesNamedStyles } from '../@types/globals';
+import { StyleSheet } from 'react-native';
+type NamedStyles<T> = StyleSheet.NamedStyles<T>;
 
 /**
  * React hook to listen to color theme changes and return formatted styles.
@@ -34,7 +37,7 @@ import useTheme from "./useTheme";
  * });
  * @param styles
  */
-export default function useThemeStyles<T>(styles: SmartStylesNamedStyles<T>): SmartStylesNamedStyles<T>{
+export default function useThemeStyles<T extends SmartStylesNamedStyles>(styles: T): NamedStyles<T> {
     const theme = useTheme();
-    return useMemo(() => SmartStyles.create(styles), [styles, theme]);
+    return useMemo(() => SmartStyles.create(styles), [styles, theme]) as NamedStyles<T>;
 }
