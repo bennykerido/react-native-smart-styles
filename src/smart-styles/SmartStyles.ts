@@ -2,7 +2,7 @@ import { StyleSheet, NativeModules, Platform } from 'react-native';
 import {getColor, hp, wp} from "../utils";
 import {normalizedProperties} from "../mapping";
 import settings from "../settings";
-import type { SmartStylesNamedStyles, SmartStylesThemeListener, ThemeListener } from '../@types/globals';
+import { type SmartStylesTypes } from '../@types';
 
 const LINKING_ERROR =
   `The package 'react-native-smart-styles' doesn't seem to be linked. Make sure: \n\n` +
@@ -61,7 +61,7 @@ function convertValue (object: Record<string, any>, key: string) {
     }
 }
 
-export function formatStyles<T extends SmartStylesNamedStyles>(styles: T) {
+export function formatStyles<T extends SmartStylesTypes.SmartStylesNamedStyles>(styles: T) {
     const res = JSON.parse(JSON.stringify(styles));
     for (const key in res) {
         convertObject(res[key]);
@@ -78,7 +78,7 @@ export function formatStyles<T extends SmartStylesNamedStyles>(styles: T) {
  */
 
 class SmartStylesClass {
-  eventListeners: Array<SmartStylesThemeListener>;
+  eventListeners: Array<SmartStylesTypes.SmartStylesThemeListener>;
   constructor() {
     this.eventListeners = [];
   }
@@ -99,7 +99,7 @@ class SmartStylesClass {
    *   },
    * });
    */
-  create<T extends SmartStylesNamedStyles>(styleSheet: T): T {
+  create<T extends SmartStylesTypes.SmartStylesNamedStyles>(styleSheet: T): T {
     return StyleSheet.create(formatStyles(styleSheet))
   }
 
@@ -120,11 +120,11 @@ class SmartStylesClass {
    *   },
    * });
    */
-  helper<T extends SmartStylesNamedStyles>(styleSheet: T): T {
+  helper<T extends SmartStylesTypes.SmartStylesNamedStyles>(styleSheet: T): T {
     return styleSheet;
   }
 
-  addThemeListener(listener: ThemeListener) {
+  addThemeListener(listener: SmartStylesTypes.ThemeListener) {
     const listenerKey = this.getListenerKey();
     this.eventListeners.push({
       key: listenerKey,
@@ -139,7 +139,7 @@ class SmartStylesClass {
 
   async notifyThemeListeners() {
     const theme = await SmartStylesNativeModule.getTheme();
-    this.eventListeners.forEach((eventListener: SmartStylesThemeListener) => {
+    this.eventListeners.forEach((eventListener: SmartStylesTypes.SmartStylesThemeListener) => {
       eventListener.listener(theme);
     });
   }
