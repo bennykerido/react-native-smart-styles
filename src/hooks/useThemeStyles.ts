@@ -2,7 +2,7 @@ import {useMemo} from 'react';
 import SmartStyles from "../smart-styles/SmartStyles";
 import useTheme from "./useTheme";
 import { StyleSheet } from 'react-native';
-import type { SmartStylesTypes } from '../@types';
+import type { SmartStylesNamedStyles } from '../types';
 type NamedStyles<T> = StyleSheet.NamedStyles<T>;
 
 /**
@@ -37,7 +37,7 @@ type NamedStyles<T> = StyleSheet.NamedStyles<T>;
  * });
  * @param styles
  */
-export default function useThemeStyles<T extends SmartStylesTypes.SmartStylesNamedStyles>(styles: T): NamedStyles<T> {
+export default function useThemeStyles<T extends SmartStylesNamedStyles>(styles: T): NamedStyles<T> {
     const theme = useTheme();
     return useMemo(() => SmartStyles.create(styles), [styles, theme]) as NamedStyles<T>;
 }

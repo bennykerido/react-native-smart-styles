@@ -1,7 +1,7 @@
 import React from 'react';
 import SmartStyles from "../smart-styles/SmartStyles";
 import {getTheme} from "../utils";
-import { type SmartStylesTypes } from '../@types';
+import type { Theme } from '../types';
 
 /**
  * React hook to listen to color theme changes.
@@ -11,7 +11,7 @@ import { type SmartStylesTypes } from '../@types';
  *
  * @function
  * @name useTheme
- * @returns {SmartStylesTheme} - The current theme, either 'dark' or 'light'.
+ * @returns {Theme} - The current theme, either 'dark' or 'light'.
  *
  * @example
  * import { useTheme, SmartStylesTheme } from 'react-native-smart-styles';
@@ -28,12 +28,12 @@ import { type SmartStylesTypes } from '../@types';
  *
  * export default MyComponent;
  */
-export default function useTheme(): SmartStylesTypes.Theme {
-    const [activeTheme, setActiveTheme] = React.useState<SmartStylesTypes.Theme>('light' as SmartStylesTypes.Theme);
+export default function useTheme(): Theme {
+    const [activeTheme, setActiveTheme] = React.useState<Theme>('light' as Theme);
     React.useEffect(() => {
-      getTheme().then(theme => setActiveTheme(theme as SmartStylesTypes.Theme));
+      getTheme().then(theme => setActiveTheme(theme as Theme));
       const listener: string = SmartStyles.addThemeListener((theme: string) => {
-        setActiveTheme(theme as SmartStylesTypes.Theme);
+        setActiveTheme(theme as Theme);
       });
 
       return () => SmartStyles.removeThemeListener(listener);
