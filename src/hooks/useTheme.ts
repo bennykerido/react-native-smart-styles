@@ -1,7 +1,7 @@
 import React from 'react';
 import SmartStyles from "../smart-styles/SmartStyles";
 import {getTheme} from "../utils";
-import type { SmartStylesTheme } from '../@types/globals';
+import { type SmartStylesTypes } from '../@types';
 
 /**
  * React hook to listen to color theme changes.
@@ -28,12 +28,12 @@ import type { SmartStylesTheme } from '../@types/globals';
  *
  * export default MyComponent;
  */
-export default function useTheme(): SmartStylesTheme {
-    const [activeTheme, setActiveTheme] = React.useState<SmartStylesTheme>('light' as SmartStylesTheme);
+export default function useTheme(): SmartStylesTypes.Theme {
+    const [activeTheme, setActiveTheme] = React.useState<SmartStylesTypes.Theme>('light' as SmartStylesTypes.Theme);
     React.useEffect(() => {
-      getTheme().then(theme => setActiveTheme(theme as SmartStylesTheme));
+      getTheme().then(theme => setActiveTheme(theme as SmartStylesTypes.Theme));
       const listener: string = SmartStyles.addThemeListener((theme: string) => {
-        setActiveTheme(theme as SmartStylesTheme);
+        setActiveTheme(theme as SmartStylesTypes.Theme);
       });
 
       return () => SmartStyles.removeThemeListener(listener);

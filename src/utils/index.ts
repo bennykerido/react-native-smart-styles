@@ -1,7 +1,7 @@
 import {Dimensions, PixelRatio} from "react-native";
 import SmartStyles, {SmartStylesNativeModule} from "../smart-styles/SmartStyles";
 import settings from "../settings";
-import type { SmartStylesTheme } from '../@types/globals';
+import type { SmartStylesTypes } from '../@types';
 
 
 const { width, height } = Dimensions.get("window");
@@ -79,7 +79,7 @@ export function getColor(value: string) {
 export async function toggleTheme(): Promise<void> {
   await SmartStylesNativeModule.toggleTheme();
   const newTheme = await getTheme();
-  settings.theme = newTheme as SmartStylesTheme;
+  settings.theme = newTheme as SmartStylesTypes.Theme;
   await SmartStyles.notifyThemeListeners();
 }
 
