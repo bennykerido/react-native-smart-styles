@@ -2,7 +2,7 @@ import { StyleSheet, NativeModules, Platform } from 'react-native';
 import {getColor, hp, wp} from "../utils";
 import {normalizedProperties} from "../mapping";
 import settings from "../settings";
-import { type SmartStylesTypes } from '../@types';
+import type { SmartStylesNamedStyles, SmartStylesThemeListener, ThemeListener } from '../types';
 
 const LINKING_ERROR =
   `The package 'react-native-smart-styles' doesn't seem to be linked. Make sure: \n\n` +
@@ -61,7 +61,7 @@ function convertValue (object: Record<string, any>, key: string) {
     }
 }
 
-export function formatStyles(styles: SmartStylesTypes.SmartStylesNamedStyles): any {
+export function formatStyles(styles: SmartStylesNamedStyles): any {
     const res = JSON.parse(JSON.stringify(styles));
     for (const key in res) {
         convertObject(res[key]);
@@ -78,7 +78,7 @@ export function formatStyles(styles: SmartStylesTypes.SmartStylesNamedStyles): a
  */
 
 class SmartStylesClass {
-  eventListeners: Array<SmartStylesTypes.SmartStylesThemeListener>;
+  eventListeners: Array<SmartStylesThemeListener>;
   constructor() {
     this.eventListeners = [];
   }
@@ -99,7 +99,7 @@ class SmartStylesClass {
    *   },
    * });
    */
-  create(styleSheet: SmartStylesTypes.SmartStylesNamedStyles): any {
+  create(styleSheet: SmartStylesNamedStyles): any {
     return StyleSheet.create(formatStyles(styleSheet))
   }
 
@@ -120,11 +120,11 @@ class SmartStylesClass {
    *   },
    * });
    */
-  helper(styleSheet: SmartStylesTypes.SmartStylesNamedStyles): SmartStylesTypes.SmartStylesNamedStyles {
+  helper(styleSheet: SmartStylesNamedStyles): SmartStylesNamedStyles {
     return styleSheet;
   }
 
-  addThemeListener(listener: SmartStylesTypes.ThemeListener) {
+  addThemeListener(listener: ThemeListener) {
     const listenerKey = this.getListenerKey();
     this.eventListeners.push({
       key: listenerKey,
@@ -139,7 +139,7 @@ class SmartStylesClass {
 
   async notifyThemeListeners() {
     const theme = await SmartStylesNativeModule.getTheme();
-    this.eventListeners.forEach((eventListener: SmartStylesTypes.SmartStylesThemeListener) => {
+    this.eventListeners.forEach((eventListener: SmartStylesThemeListener) => {
       eventListener.listener(theme);
     });
   }
