@@ -61,7 +61,7 @@ function convertValue (object: Record<string, any>, key: string) {
     }
 }
 
-export function formatStyles(styles: SmartStylesNamedStyles): any {
+export function formatStyles(styles: SmartStylesNamedStyles<any>): any {
     const res = JSON.parse(JSON.stringify(styles));
     for (const key in res) {
         convertObject(res[key]);
@@ -99,7 +99,7 @@ class SmartStylesClass {
    *   },
    * });
    */
-  create(styleSheet: SmartStylesNamedStyles): any {
+  create<T extends SmartStylesNamedStyles<T> | SmartStylesNamedStyles<any>>(styleSheet: T & SmartStylesNamedStyles<any>): T {
     return StyleSheet.create(formatStyles(styleSheet))
   }
 
@@ -120,7 +120,9 @@ class SmartStylesClass {
    *   },
    * });
    */
-  helper(styleSheet: SmartStylesNamedStyles): SmartStylesNamedStyles {
+  helper<T extends SmartStylesNamedStyles<T> | SmartStylesNamedStyles<any>>(
+    styleSheet: T & SmartStylesNamedStyles<any>
+  ): T {
     return styleSheet;
   }
 

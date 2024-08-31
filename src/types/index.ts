@@ -2,8 +2,8 @@ import type { ColorValue, ImageStyle, ShadowStyleIOS, StyleProp, TextStyle, View
 
 export type Theme = 'light' | 'dark';
 
-export type ComponentStyles = {
-  [key: string]: StyleProp<ViewStyle | TextStyle | ImageStyle | ColorValue | ShadowStyleIOS>;
+export type ComponentStyles<T> = {
+  [P in keyof T]: StyleProp<ViewStyle | TextStyle | ImageStyle | ColorValue | ShadowStyleIOS>;
 }
 
 export type ThemeListener = (theme: string) => void;
@@ -21,7 +21,7 @@ export interface Settings {
   theme: Theme,
 }
 
-export interface SmartStylesNamedStyles extends ComponentStyles {
+export type SmartStylesNamedStyles<T> = ComponentStyles<T> & {
   settings?: Record<string, any>;
 }
 

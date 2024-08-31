@@ -37,7 +37,7 @@ type NamedStyles<T> = StyleSheet.NamedStyles<T>;
  * });
  * @param styles
  */
-export default function useThemeStyles<T extends SmartStylesNamedStyles>(styles: T): NamedStyles<T> {
+export default function useThemeStyles<T extends SmartStylesNamedStyles<T>>(styles: T): NamedStyles<T> {
     const theme = useTheme();
     return useMemo(() => SmartStyles.create(styles), [styles, theme]) as NamedStyles<T>;
 }
