@@ -1,12 +1,8 @@
 import * as React from 'react';
+import { SmartStyles, tc, toggleTheme, withTheme } from 'react-native-smart-styles';
+import { Button, Text, View } from 'react-native';
 
-import { View, Text, Button} from 'react-native';
-import {SmartStyles, tc, toggleTheme, useTheme, useThemeStyles} from "react-native-smart-styles";
-
-export default function App() {
-  const theme = useTheme();
-  const styles = useThemeStyles(unformattedStyles);
-
+function App({theme}: {theme: string}) {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Active Theme: {theme}</Text>
@@ -18,7 +14,10 @@ export default function App() {
   );
 }
 
-const unformattedStyles = SmartStyles.helper({
+export default withTheme(App);
+
+
+const styles = SmartStyles.create({
   container: {
     flex: 1,
     alignItems: 'center',

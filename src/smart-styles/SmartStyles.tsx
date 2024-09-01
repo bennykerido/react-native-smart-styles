@@ -1,8 +1,8 @@
-import { StyleSheet, NativeModules, Platform } from 'react-native';
+import { NativeModules, Platform, StyleSheet } from 'react-native';
 import {getColor, hp, wp} from "../utils";
 import {normalizedProperties} from "../mapping";
 import settings from "../settings";
-import type { SmartStylesNamedStyles, SmartStylesThemeListener, ThemeListener } from '../types';
+import type { SmartStylesNamedStyles, SmartStylesThemeListener, Theme, ThemeListener } from '../types';
 
 const LINKING_ERROR =
   `The package 'react-native-smart-styles' doesn't seem to be linked. Make sure: \n\n` +
@@ -20,9 +20,6 @@ export const SmartStylesNativeModule = NativeModules.SmartStyles
       },
     }
   );
-(async () => {
-  settings.theme = await SmartStylesNativeModule.getTheme();
-})();
 
 function convertObject (object: Record<string, any>) {
     for (const key in object) {
@@ -69,6 +66,32 @@ export function formatStyles(styles: SmartStylesNamedStyles<any>): any {
     return res;
 }
 
+function createProxy<T extends SmartStylesNamedStyles<T> | SmartStylesNamedStyles<any>>(
+  styles: T & SmartStylesNamedStyles<any>
+) {
+  const originalStyles: T & SmartStylesNamedStyles<T> = JSON.parse(JSON.stringify(styles));
+  let formattedStyles = StyleSheet.create(formatStyles(originalStyles));
+
+  SmartStyles.addThemeListener(() => {
+    formattedStyles = StyleSheet.create(formatStyles(originalStyles));
+  });
+
+  const handler = {
+    get(_: any, property: any, receiver: unknown) {
+      const value = Reflect.get(formattedStyles, property, receiver);
+      if (typeof value === 'object' && value !== null) {
+        return createProxy<T>(value);
+      }
+      return value;
+    },
+    set(_: any, property: any, value: any, receiver: unknown) {
+      return Reflect.set(formattedStyles, property, value, receiver);
+    },
+  };
+
+  return new Proxy(formattedStyles, handler);
+}
+
 /**
  * SmartStyles
  *
@@ -99,31 +122,10 @@ class SmartStylesClass {
    *   },
    * });
    */
-  create<T extends SmartStylesNamedStyles<T> | SmartStylesNamedStyles<any>>(styleSheet: T & SmartStylesNamedStyles<any>): T {
-    return StyleSheet.create(formatStyles(styleSheet))
-  }
-
-  /**
-   * Helps in writing stylesheets with auto-complete support.
-   *
-   * This function assists in writing stylesheets by providing auto-complete
-   * support for the properties and values. It does not format the stylesheet.
-   *
-   * @function
-   * @name SmartStyles.helper
-   * @returns {Object} - The same stylesheet object, intended for further formatting.
-   *
-   * @example
-   * const unformattedStyles = SmartStyles.helper({
-   *   container: {
-   *     backgroundColor: tc('#fff', '#000'),
-   *   },
-   * });
-   */
-  helper<T extends SmartStylesNamedStyles<T> | SmartStylesNamedStyles<any>>(
+  create<T extends SmartStylesNamedStyles<T> | SmartStylesNamedStyles<any>>(
     styleSheet: T & SmartStylesNamedStyles<any>
   ): T {
-    return styleSheet;
+    return createProxy(styleSheet) as T;
   }
 
   addThemeListener(listener: ThemeListener) {
@@ -160,3 +162,8 @@ class SmartStylesClass {
 const SmartStyles = new SmartStylesClass();
 
 export default SmartStyles;
+
+SmartStylesNativeModule.getTheme().then((theme: Theme) => {
+  settings.theme = theme;
+  SmartStyles.notifyThemeListeners();
+});

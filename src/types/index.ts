@@ -1,9 +1,28 @@
 import type { ColorValue, ImageStyle, ShadowStyleIOS, StyleProp, TextStyle, ViewStyle } from 'react-native';
+import Config from '../config';
+
+export interface ConfigFile {
+  fonts?: Record<string, string>;
+  colors?: Record<string, string>;
+  baseWidth?: number;
+  baseHeight?: number;
+}
+
+type ConfigColors = keyof typeof Config.colors;
+type ConfigFonts = keyof typeof Config.fonts;
 
 export type Theme = 'light' | 'dark';
 
 export type ComponentStyles<T> = {
-  [P in keyof T]: StyleProp<ViewStyle | TextStyle | ImageStyle | ColorValue | ShadowStyleIOS>;
+  [P in keyof T]: StyleProp<
+    ViewStyle |
+    TextStyle |
+    ImageStyle |
+    ColorValue |
+    ConfigFonts |
+    ConfigColors |
+    ShadowStyleIOS
+  >;
 }
 
 export type ThemeListener = (theme: string) => void;
@@ -23,11 +42,4 @@ export interface Settings {
 
 export type SmartStylesNamedStyles<T> = ComponentStyles<T> & {
   settings?: Record<string, any>;
-}
-
-export interface ConfigFile {
-  fonts?: Record<string, string>;
-  colors?: Record<string, string>;
-  baseWidth?: number;
-  baseHeight?: number;
 }
